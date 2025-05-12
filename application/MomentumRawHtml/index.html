@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App - Redirecting</title>
+  <style>
+    body {
+      font-family: Arial Black, Helvetica, sans-serif;
+      background-color: #F7FFF7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .redirect-container {
+      border: 5px solid #292F36;
+      background-color: #FF6B6B;
+      padding: 30px;
+      box-shadow: 10px 10px 0px #292F36;
+      text-align: center;
+      color: #F7FFF7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="redirect-container">
+    <h1>REDIRECTING TO LOGIN...</h1>
+  </div>
+
+  <script>
+    // Redirect to login page after a brief delay
+    setTimeout(function () {
+      window.location.href = 'login.html';
+    }, 1500);
+  </script>
+</body>
+
+</html>

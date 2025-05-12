@@ -1,0 +1,357 @@
+/* Neo Brutalism Todo App - Shared Styles */
+
+:root {
+    /* Color Palette */
+    --primary: #FF6B6B;    /* bright red */
+    --secondary: #4ECDC4;  /* teal */
+    --accent: #FFE66D;     /* yellow */
+    --dark: #292F36;       /* almost black */
+    --light: #F7FFF7;      /* off-white */
+    
+    /* Priority Colors */
+    --priority-high: #FF4747;
+    --priority-medium: #FFD166;
+    --priority-low: #06D6A0;
+    
+    /* Status Colors */
+    --status-todo: #999999;
+    --status-in-progress: #4361EE;
+    --status-done: #06D6A0;
+    
+    /* Neo Brutalism Properties */
+    --border-thickness: 4px;
+    --box-shadow-offset: 8px;
+    --border-radius: 0px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial Black', 'Helvetica', sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Neo Brutalism Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--secondary);
+    color: var(--dark);
+    border: var(--border-thickness) solid var(--dark);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: var(--box-shadow-offset) var(--box-shadow-offset) 0 var(--dark);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: calc(var(--box-shadow-offset) - 2px) calc(var(--box-shadow-offset) - 2px) 0 var(--dark);
+}
+
+.btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: calc(var(--box-shadow-offset) - 4px) calc(var(--box-shadow-offset) - 4px) 0 var(--dark);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: var(--dark);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: var(--border-thickness) solid var(--dark);
+    background-color: var(--light);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Error Messages */
+.error-message {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 10px;
+    border: var(--border-thickness) solid var(--dark);
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Card Styles */
+.card {
+    background-color: var(--light);
+    border: var(--border-thickness) solid var(--dark);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--box-shadow-offset) var(--box-shadow-offset) 0 var(--dark);
+}
+
+/* Priority Badges */
+.priority {
+    display: inline-block;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 2px solid var(--dark);
+    margin-right: 10px;
+}
+
+.priority-high {
+    background-color: var(--priority-high);
+    color: var(--light);
+}
+
+.priority-medium {
+    background-color: var(--priority-medium);
+    color: var(--dark);
+}
+
+.priority-low {
+    background-color: var(--priority-low);
+    color: var(--dark);
+}
+
+/* Status Badges */
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 2px solid var(--dark);
+}
+
+.status-todo {
+    background-color: var(--status-todo);
+    color: var(--light);
+}
+
+.status-in-progress {
+    background-color: var(--status-in-progress);
+    color: var(--light);
+}
+
+.status-done {
+    background-color: var(--status-done);
+    color: var(--dark);
+}
+
+/* Header */
+.header {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 20px;
+    border-bottom: var(--border-thickness) solid var(--dark);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+/* Auth Pages */
+.auth-container {
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.auth-card {
+    padding: 30px;
+}
+
+.auth-card h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.auth-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.accent-link {
+    color: var(--accent);
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+}
+
+.accent-link:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Todo List Styles */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filter-sort {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.todo-item {
+    margin-bottom: 20px;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.todo-badges {
+    display: flex;
+    gap: 10px;
+}
+
+.todo-description {
+    margin-bottom: 15px;
+}
+
+.todo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.todo-due-date {
+    font-weight: bold;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 30px;
+    font-size: 1.2rem;
+    color: var(--dark);
+    background-color: var(--light);
+    border: var(--border-thickness) solid var(--dark);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .todo-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .todo-badges {
+        margin-top: 10px;
+    }
+    
+    .todo-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .todo-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .filter-sort {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

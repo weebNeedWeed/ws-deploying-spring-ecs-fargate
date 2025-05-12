@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="header">
+    <h1>MY TODOS</h1>
+    <div>
+      <span id="user-name">User</span>
+      <button id="logout-btn" class="btn btn-accent">LOGOUT</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="controls">
+      <div class="filter-sort">
+        <div class="form-group">
+          <label for="filter-status" class="form-label">Filter by Status</label>
+          <select id="filter-status" class="form-input">
+            <option value="all">All</option>
+            <option value="todo">To Do</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="filter-priority" class="form-label">Filter by Priority</label>
+          <select id="filter-priority" class="form-input">
+            <option value="all">All</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sort-by" class="form-label">Sort By</label>
+          <select id="sort-by" class="form-input">
+            <option value="date-desc">Date (Newest)</option>
+            <option value="date-asc">Date (Oldest)</option>
+            <option value="priority-desc">Priority (High to Low)</option>
+            <option value="priority-asc">Priority (Low to High)</option>
+          </select>
+        </div>
+      </div>
+
+      <a href="add-todo.html" class="btn btn-primary">ADD NEW TODO</a>
+    </div>
+
+    <div id="todos-container">
+      <!-- Todo items will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <!-- Todo Item Template -->
+  <template id="todo-item-template">
+    <div class="card todo-item">
+      <div class="todo-header">
+        <h2 class="todo-title"></h2>
+        <div class="todo-badges">
+          <span class="priority"></span>
+          <span class="status"></span>
+        </div>
+      </div>
+      <p class="todo-description"></p>
+      <div class="todo-footer">
+        <div class="todo-due-date">Due: <span></span></div>
+        <div class="todo-actions">
+          <button class="btn btn-accent edit-todo">EDIT</button>
+          <button class="btn btn-primary change-status">MARK AS IN PROGRESS</button>
+          <button class="btn btn-primary delete-todo">DELETE</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="js/auth.js"></script>
+  <script src="js/todos.js"></script>
+</body>
+
+</html>
