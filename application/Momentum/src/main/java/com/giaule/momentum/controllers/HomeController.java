@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -48,10 +48,52 @@ public class HomeController {
     }
 
     @PostMapping("add")
-    public String addTodo(@ModelAttribute("request") AddTodoRequest addTodoRequest, @AuthenticationPrincipal User user) {
+    public String addTodo(AddTodoRequest addTodoRequest, @AuthenticationPrincipal User user) {
         Todo todo = addTodoRequest.toTodo();
         user.addTodo(todo);
         userRepository.save(user);
+        return "redirect:/";
+    }
+
+    @PostMapping("{id}/change-status")
+    public String changeStatus(@PathVariable("id") long id, Todo.TodoStatus status) {
+        Optional<Todo> optionalTodo = todoRepository.findById(id);
+        if(optionalTodo.isPresent()) {
+            Todo todo = optionalTodo.get();
+            todo.setStatus(status);
+            todoRepository.save(todo);
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("{id}/edit")
+    public String editTodoForm(@PathVariable("id") long id, Model model) {
+        Optional<Todo> optionalTodo = todoRepository.findById(id);
+        if(optionalTodo.isEmpty()) {
+            return "redirect:/";
+        }
+
+        Todo todo = optionalTodo.get();
+        model.addAttribute("todo", todo);
+
+        return "edit";
+    }
+
+    @PostMapping("{id}/edit")
+    public String editTodo(@PathVariable("id") long id, Todo todo, @AuthenticationPrincipal User user) {
+        todo.setUser(user);
+        todoRepository.save(todo);
+        return "redirect:/";
+    }
+
+    @PostMapping("{id}/delete")
+    public String deleteTodo(@PathVariable("id") long id, @AuthenticationPrincipal User user) {
+        Optional<Todo> optionalTodo = todoRepository.findById(id);
+        if(optionalTodo.isPresent()) {
+            Todo todo = optionalTodo.get();
+            todoRepository.delete(todo);
+        }
+
         return "redirect:/";
     }
 }

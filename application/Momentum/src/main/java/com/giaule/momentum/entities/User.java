@@ -29,6 +29,11 @@ public class User implements UserDetails {
         todo.setUser(this);
     }
 
+    public void removeTodo(Todo todo) {
+        todos.remove(todo);
+        todo.setUser(null);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));

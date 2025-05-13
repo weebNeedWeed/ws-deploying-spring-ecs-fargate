@@ -2,6 +2,7 @@ package com.giaule.momentum.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime due;
 
     private String title;
@@ -30,8 +32,9 @@ public class Todo {
         TODO, IN_PROGRESS, DONE
     }
 
+    // should be in order low -> high (in db, it will be 0 -> 2)
     public enum PriorityLevel {
-        HIGH, MEDIUM, LOW
+        LOW, MEDIUM, HIGH
     }
 
     @Override
