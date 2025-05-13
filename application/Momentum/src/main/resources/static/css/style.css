@@ -162,7 +162,7 @@ body {
     color: var(--light);
 }
 
-.status-in-progress {
+.status-in_progress {
     background-color: var(--status-in-progress);
     color: var(--light);
 }

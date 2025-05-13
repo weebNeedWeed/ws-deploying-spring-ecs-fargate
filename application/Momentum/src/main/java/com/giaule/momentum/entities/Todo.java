@@ -14,7 +14,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime date;
+    private LocalDateTime due;
 
     private String title;
     private String description;

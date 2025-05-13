@@ -21,11 +21,12 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Todo> todos = new ArrayList<>();
 
     public void addTodo(Todo todo) {
         todos.add(todo);
+        todo.setUser(this);
     }
 
     @Override

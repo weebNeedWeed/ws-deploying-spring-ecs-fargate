@@ -55,6 +55,6 @@ public class AuthController {
 
         userRepository.save(user);
 
-        return "register";
+        return "redirect:/login";
     }
 }

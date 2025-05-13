@@ -3,123 +3,158 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo App - Home</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App - Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 <header class="header">
-  <h1>MOMENTUM</h1>
-  <form th:action="@{/logout}" method="post">
-    <span id="user-name">User</span>
-    <button type="submit" id="logout-btn" class="btn btn-accent">LOGOUT</button>
-  </form>
+    <h1>MOMENTUM</h1>
+    <form th:action="@{/logout}" method="post">
+        <span id="user-name">User</span>
+        <button type="submit" id="logout-btn" class="btn btn-accent">LOGOUT</button>
+    </form>
 </header>
 
 <div class="container">
-  <div class="controls">
-    <div class="filter-sort">
-      <div class="form-group">
-        <label for="filter-status" class="form-label">Filter by Status</label>
-        <select id="filter-status" class="form-input">
-          <option value="all">All</option>
-          <option value="todo">To Do</option>
-          <option value="in-progress">In Progress</option>
-          <option value="done">Done</option>
-        </select>
-      </div>
+    <div class="controls">
+        <form method="get" class="filter-sort" id="filter-form">
+            <div class="form-group">
+                <label for="filter-status" class="form-label">Filter by Status</label>
+                <select id="filter-status" class="form-input" name="status">
+                    <option value="ALL" th:selected="${#strings.equals(param.status, 'ALL')}">ALL</option>
+                    <option th:each="status : ${T(com.giaule.momentum.entities.Todo$TodoStatus).values()}"
+                            th:selected="${#strings.equals(param.status, status)}"
+                            th:text="${status}" th:value="${status}">placeholder
+                    </option>
+                </select>
+            </div>
 
-      <div class="form-group">
-        <label for="filter-priority" class="form-label">Filter by Priority</label>
-        <select id="filter-priority" class="form-input">
-          <option value="all">All</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
-      </div>
+            <div class="form-group">
+                <label for="filter-priority" class="form-label">Filter by Priority</label>
+                <select id="filter-priority" class="form-input" name="priorityLevel">
+                    <option value="ALL"
+                            th:selected="${#strings.equals(param.priorityLevel, 'ALL')}">ALL</option>
+                    <option th:each="p : ${T(com.giaule.momentum.entities.Todo$PriorityLevel).values()}" th:text="${p}"
+                            th:selected="${#strings.equals(param.priorityLevel, p)}"
+                            th:value="${p}">placeholder
+                    </option>
+                </select>
+            </div>
 
-      <div class="form-group">
-        <label for="sort-by" class="form-label">Sort By</label>
-        <select id="sort-by" class="form-input">
-          <option value="date-desc">Date (Newest)</option>
-          <option value="date-asc">Date (Oldest)</option>
-          <option value="priority-desc">Priority (High to Low)</option>
-          <option value="priority-asc">Priority (Low to High)</option>
-        </select>
-      </div>
+            <div class="form-group">
+                <label for="sort-by" class="form-label">Sort By</label>
+                <select id="sort-by" class="form-input" name="sortBy">
+                    <option th:selected="${#strings.equals(param.sortBy, 'due-desc')}" value="due-desc">Date (Newest)</option>
+                    <option th:selected="${#strings.equals(param.sortBy, 'due-asc')}" value="due-asc">Date (Oldest)</option>
+                    <option th:selected="${#strings.equals(param.sortBy, 'priorityLevel-desc')}" value="priorityLevel-desc">Priority (High to Low)</option>
+                    <option th:selected="${#strings.equals(param.sortBy, 'priorityLevel-asc')}" value="priorityLevel-asc">Priority (Low to High)</option>
+                </select>
+            </div>
+        </form>
+
+        <a th:href="@{/add}" id="add-todo-btn" class="btn btn-primary">ADD NEW TODO</a>
     </div>
 
-    <button id="add-todo-btn" class="btn btn-primary">ADD NEW TODO</button>
-  </div>
-
-  <div id="todos-container">
-    <!-- Todo items will be dynamically inserted here -->
-  </div>
-
-  <!-- Add Todo Modal -->
-  <div id="add-todo-modal" class="modal" style="display: none;">
-    <div class="modal-content card">
-      <h2>ADD NEW TODO</h2>
-      <form id="add-todo-form">
-        <div class="form-group">
-          <label for="todo-title" class="form-label">Title</label>
-          <input type="text" id="todo-title" class="form-input" required>
+    <div id="todos-container">
+        <!-- Todo items will be dynamically inserted here -->
+        <div class="card todo-item" th:each="todo : ${todos}" th:object="${todo}">
+            <div class="todo-header">
+                <h2 class="todo-title" th:text="*{title}"></h2>
+                <div class="todo-badges">
+                    <span th:class="|priority priority-*{priorityLevel.toString().toLowerCase()}|"
+                          th:text="*{priorityLevel}"></span>
+                    <span th:class="|status status-*{status.toString().toLowerCase()}|" th:text="*{status}"></span>
+                </div>
+            </div>
+            <p class="todo-description" th:text="*{description}"></p>
+            <div class="todo-footer">
+                <div class="todo-due-date">Due: <span
+                        th:text="${#temporals.format(todo.due, 'yyyy/MM/dd HH:mm')}"></span></div>
+                <div class="todo-actions">
+                    <button class="btn btn-accent edit-todo">EDIT</button>
+                    <button class="btn btn-primary change-status">MARK AS IN PROGRESS</button>
+                    <button class="btn btn-primary delete-todo">DELETE</button>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-          <label for="todo-description" class="form-label">Description</label>
-          <textarea id="todo-description" class="form-input" rows="3" required></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="todo-priority" class="form-label">Priority</label>
-          <select id="todo-priority" class="form-input">
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="todo-due-date" class="form-label">Due Date</label>
-          <input type="date" id="todo-due-date" class="form-input" required>
-        </div>
-
-        <div class="form-group button-group">
-          <button type="button" id="cancel-add-todo" class="btn btn-accent">CANCEL</button>
-          <button type="submit" class="btn btn-primary">SAVE</button>
-        </div>
-      </form>
     </div>
-  </div>
+
+    <!-- Add Todo Modal -->
+    <div id="add-todo-modal" class="modal" style="display: none;">
+        <div class="modal-content card">
+            <h2>ADD NEW TODO</h2>
+            <form id="add-todo-form">
+                <div class="form-group">
+                    <label for="todo-title" class="form-label">Title</label>
+                    <input type="text" id="todo-title" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="todo-description" class="form-label">Description</label>
+                    <textarea id="todo-description" class="form-input" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="todo-priority" class="form-label">Priority</label>
+                    <select id="todo-priority" class="form-input">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="todo-due-date" class="form-label">Due Date</label>
+                    <input type="date" id="todo-due-date" class="form-input" required>
+                </div>
+
+                <div class="form-group button-group">
+                    <button type="button" id="cancel-add-todo" class="btn btn-accent">CANCEL</button>
+                    <button type="submit" class="btn btn-primary">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <!-- Todo Item Template -->
 <template id="todo-item-template">
-  <div class="card todo-item">
-    <div class="todo-header">
-      <h2 class="todo-title"></h2>
-      <div class="todo-badges">
-        <span class="priority"></span>
-        <span class="status"></span>
-      </div>
+    <div class="card todo-item">
+        <div class="todo-header">
+            <h2 class="todo-title"></h2>
+            <div class="todo-badges">
+                <span class="priority"></span>
+                <span class="status"></span>
+            </div>
+        </div>
+        <p class="todo-description"></p>
+        <div class="todo-footer">
+            <div class="todo-due-date">Due: <span></span></div>
+            <div class="todo-actions">
+                <button class="btn btn-accent edit-todo">EDIT</button>
+                <button class="btn btn-primary change-status">MARK AS IN PROGRESS</button>
+                <button class="btn btn-primary delete-todo">DELETE</button>
+            </div>
+        </div>
     </div>
-    <p class="todo-description"></p>
-    <div class="todo-footer">
-      <div class="todo-due-date">Due: <span></span></div>
-      <div class="todo-actions">
-        <button class="btn btn-accent edit-todo">EDIT</button>
-        <button class="btn btn-primary change-status">MARK AS IN PROGRESS</button>
-        <button class="btn btn-primary delete-todo">DELETE</button>
-      </div>
-    </div>
-  </div>
 </template>
 
-<script th:src="@{/js/todos.js}"></script>
+<script>
+    window.onload = function () {
+        const form = document.getElementById("filter-form");
+        const filterStatus = document.getElementById("filter-status")
+        const filterPriority = document.getElementById("filter-priority")
+        const sortBy = document.getElementById("sort-by");
+
+        filterStatus.onchange = () => form.submit();
+        filterPriority.onchange = () => form.submit();
+        sortBy.onchange = () => form.submit();
+    };
+</script>
+
 </body>
 
 </html>
