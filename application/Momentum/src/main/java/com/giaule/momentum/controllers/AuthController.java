@@ -1,7 +1,9 @@
 package com.giaule.momentum.controllers;
 
 import com.giaule.momentum.dtos.RegisterRequest;
+import com.giaule.momentum.entities.Role;
 import com.giaule.momentum.entities.User;
+import com.giaule.momentum.repositories.RoleRepository;
 import com.giaule.momentum.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public AuthController(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public AuthController(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping("/login")
@@ -52,6 +56,9 @@ public class AuthController {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        Role role = roleRepository.findFirstByName("ROLE_USER");
+        user.addRole(role);
 
         userRepository.save(user);
 

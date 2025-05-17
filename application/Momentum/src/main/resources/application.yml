@@ -8,5 +8,14 @@ spring:
     password: mypassword
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
+  flyway:
+    enabled: true
+    baseline-version: 0
+    baseline-on-migrate: true
+
+app:
+  jwt:
+    expires-in-ms: 3600000
+    secret: myveryverystrongsecret123123
