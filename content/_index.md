@@ -1,22 +1,26 @@
 ---
-title : "Infrastructure as Code: Introduction to CloudFormation"
+title : "Serverless Containers: Deploying Your Application On ECS and Fargate"
 date : "`r Sys.Date()`"
 weight : 1
 chapter : false
 ---
 
-# Infrastructure as Code: Introduction to CloudFormation
+# Serverless Containers: Deploying Your Application On ECS and Fargate
 
-#### Overview
+Hi there 👋, I'm Giau Le. Welcome to my workshop on **Amazon Elastic Container Service(Amazon ECS)** and **AWS Fargate**!
 
-In this lab, you will learn the basis of **AWS CloudFormation**, the tool that enable you to provision AWS resources by defining a file called *template*. In a template, you specify the resources you need, the properties for each resource and the location you want those resources to be deployed. CloudFormation will interpret your template and generate your resources automatically. And at the end of each section, you will take the hands-on lab to solidify your understanding.
+In this workshop, we will dive into the core concepts of Amazon ECS and AWS Fargate, exploring what they are and how they work. We will also apply our acquired knowledge by deploying a to-do application called **Momentum** on these services. Then, we will construct a CI/CD pipeline for our application utilizing AWS developer tools, such as **AWS CodePipeline**, **AWS CodeBuild**, and **AWS CodeDeploy**.
 
-![Overall](/images/overall.png?width=15pc)
+![hero](/images/container_hero.jpg)
 
-#### Content
+#### Target Audience
 
-1. [Introduction](1-introduce/)
-2. [Preparation](2-firewallinvpc/)
-3. [Template Basics](3-TemplateBasics)
-4. [Template Improvement](4-TemplateImprovement)
-5. [Conclusion](5-Conclusion)
+This workshop is designed for beginners who are new to AWS and want to learn about Amazon ECS and AWS Fargate.
+
+#### Time
+
+This workshop might take up to **3 hours** to complete.
+
+#### Workshop Modules
+
+**1\. [Introduction](1-introduction/):** Introduce the to-do application, Momentum, that we will deploy. We will review the cloud architecture and examine the fundamentals of containers, Amazon ECS and AWS Fargate.
