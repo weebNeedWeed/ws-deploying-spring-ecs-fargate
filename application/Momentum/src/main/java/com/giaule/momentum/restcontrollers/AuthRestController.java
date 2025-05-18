@@ -7,12 +7,13 @@ import com.giaule.momentum.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@PreAuthorize("isAnonymous()")
+@CrossOrigin
 public class AuthRestController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -25,6 +26,7 @@ public class AuthRestController {
         this.jwtUtils = jwtUtils;
     }
 
+    @PreAuthorize("isAnonymous()")
     @PostMapping(value = "/login", consumes = "application/json")
     public ResponseEntity<String> login(@RequestBody RestLoginRequest loginRequest) {
         User user = userRepository.findFirstByUsername(
@@ -38,12 +40,18 @@ public class AuthRestController {
             return ResponseEntity.badRequest().body("Invalid username or password");
         }
 
-        return ResponseEntity.ok().body(jwtUtils.generateToken(user));
-    }
+        boolean hasAdminRole = false;
+        for(GrantedAuthority authority : user.getAuthorities()) {
+            if(authority.getAuthority().equals("ROLE_ADMIN")) {
+                hasAdminRole = true;
+                break;
+            }
+        }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping("/test")
-    public String test() {
-        return "Hello";
+        if(!hasAdminRole) {
+            return ResponseEntity.badRequest().body("Invalid username or password");
+        }
+
+        return ResponseEntity.ok().body(jwtUtils.generateToken(user));
     }
 }

@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  todos-api:
+    depends_on:
+      - db
+    build:
+      context: ./Momentum
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres?user=postgres&password=mypassword
+    ports:
+      - "8080:8080"
+
+  admin:
+    depends_on:
+      - todos-api
+    build:
+      context: ./MomentumAdmin
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      REACT_BASE_URL: http://todos-api:8080/api/
+    ports:
+      - "9090:80"
+
+volumes:
+  postgres_data:

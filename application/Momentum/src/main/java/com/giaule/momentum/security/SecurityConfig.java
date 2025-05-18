@@ -2,7 +2,6 @@ package com.giaule.momentum.security;
 
 import com.giaule.momentum.entities.User;
 import com.giaule.momentum.repositories.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;

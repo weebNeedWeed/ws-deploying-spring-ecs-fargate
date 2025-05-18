@@ -1,7 +1,6 @@
 package com.giaule.momentum.dtos;
 
 import com.giaule.momentum.entities.Todo;
-import com.giaule.momentum.entities.User;
 import lombok.Data;
 
 import java.time.LocalDateTime;

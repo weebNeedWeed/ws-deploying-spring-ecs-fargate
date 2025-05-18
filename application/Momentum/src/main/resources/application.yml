@@ -3,9 +3,7 @@ spring:
     name: Momentum
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: mypassword
+    url: jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mypassword
   jpa:
     hibernate:
       ddl-auto: validate

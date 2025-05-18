@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;900&display=swap');
+@import "tailwindcss";
+
+@theme{
+  --color-neo-yellow: #FFDD00;
+  --color-neo-red: #FF5252;
+  --color-neo-blue: #3D5AF1;
+  --color-neo-black: #000000;
+  --font-display: "Archivo Black", Helvetica, Arial, sans-serif;
+  --font-body: Inter, sans-serif;
+  --shadow-neo: 5px 5px 0px 0px rgba(0,0,0,1);
+  --shadow-neo-lg: 8px 8px 0px 0px rgba(0,0,0,1);
+  --border-width-6: 6px;
+  --border-width-8: 8px;
+}
+
+@layer base {
+  body {
+    @apply font-body bg-white;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-black;
+  }
+}
+
+@layer components {
+  .neo-card {
+    @apply bg-white border-4 border-neo-black shadow-neo p-6 transform rotate-1 transition-all duration-200 hover:rotate-0 hover:shadow-neo-lg;
+  }
+  .neo-button {
+    @apply bg-neo-yellow border-4 border-neo-black shadow-neo px-6 py-3 font-display uppercase font-black text-xl transform -rotate-1 transition-all duration-200 hover:rotate-0 hover:shadow-neo-lg active:translate-y-1 active:shadow-none;
+  }
+  .neo-input {
+    @apply bg-white border-4 border-neo-black shadow-neo p-3 font-body text-lg focus:outline-none focus:ring-4 focus:ring-neo-yellow;
+  }
+  .neo-nav-link {
+    @apply font-display text-xl border-b-4 border-transparent hover:border-neo-black transition-all duration-200;
+  }
+  .neo-nav-link.active {
+    @apply border-neo-black;
+  }
+}

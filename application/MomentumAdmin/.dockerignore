@@ -1,0 +1,38 @@
+# Ignore development and build artifacts
+.git
+.gitignore
+.env
+*.log
+*.md
+*.txt
+
+# Node.js dependencies
+node_modules/
+npm-debug.log
+
+# Build output
+target/
+build/
+dist/
+out/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# Test files
+test/
+*.test.js
+*.spec.js
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store

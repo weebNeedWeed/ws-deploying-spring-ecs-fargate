@@ -1,0 +1,42 @@
+# Gradle
+.gradle/
+build/
+out/
+gradlew
+gradlew.bat
+
+# Maven
+target/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Test outputs
+test-output/
+
+# Java class files
+*.class
+
+# Docker related
+.dockerignore
+Dockerfile
+docker-compose*.yml
+
+# Git
+.git/
+.gitignore
