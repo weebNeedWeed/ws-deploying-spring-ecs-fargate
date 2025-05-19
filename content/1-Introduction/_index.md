@@ -15,7 +15,7 @@ The key benefits of Amazon ECS:
 3. Deploy faster and focus on your applications by using Amazon ECS with **AWS Fargate serverless compute** for containers.
 4. Optimize for security and compliance.
 
-![1](/images/1-Introduction/1.svg?width=40pc)
+![1](/images/1/1.svg?width=40pc)
 
 Amazon ECS provides **two main methods** for launching containers: through **Amazon Elastic Compute Cloud (Amazon EC2)** and through **AWS Fargate**.
 
@@ -23,6 +23,6 @@ Amazon ECS provides **two main methods** for launching containers: through **Ama
 
 Instead of manually provisioning the infrastruction layer for your containers to run, you can **delegate those hard tasks to AWS** by using **AWS Fargate**. AWS Fargate is a serverless, pay-as-you-go compute engine that lets you focus on building applications without managing servers. When running your applications using AWS Fargate, you are **effectively moving tasks such as server management, resource allocation, and scaling to AWS**, thereby **accelerateing** the process of going from idea to production on the cloud, and **lowering** the total cost of ownership.
 
-![1](/images/1-Introduction/2.svg?width=40pc)
+![1](/images/1/2.svg?width=40pc)
 
 Now, we have covered the comprehensive overview of Amazon ECS and AWS Fargate. You should be able to understand why AWS Fargate is often chosen instead of Amazon EC2. Let's take a deeper dive in the next section.
