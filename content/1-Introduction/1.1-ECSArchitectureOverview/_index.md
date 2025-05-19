@@ -16,6 +16,6 @@ Container images used for running tasks can come from multiple sources, such as 
 
 Although you can directly create a task, this approach is not recommended for production workloads. Instead, you typically create a **service (6)**. A service runs and maintains a desired number of tasks simultaneouly in a cluster, all based on a task definition. If one of your tasks fails or stops, the service launches another task to replace it. This helps maintain your desired number of tasks in the service. The service also offers various deployment strategies to ensure your application highly available (with minimal or no downtime) during the deployment of new the application versions. Amazon ECS facilitates the connection of multiple services by a feature called **Service Connect**. We will discuss it later.
 
-The service can create tasks on either EC2 Instances (EC2 Mode) or **AWS Fargate (Fargate Mode)**, or both of them. In this workshop, we will focus on AWS Fargate. The [previous section](/1-introduction) have shown you the reason.
+The service can create tasks on either EC2 Instances (EC2 Mode) or **AWS Fargate (Fargate Mode)**, or both of them. In this workshop, we will focus on AWS Fargate. The [previous section](/1-introduction) has shown you the reason.
 
 ![2](/images/1.1/2.svg)
