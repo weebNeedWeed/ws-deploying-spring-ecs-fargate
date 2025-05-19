@@ -21,9 +21,9 @@ To demonstrate inter-service connectivity, I also created a separate another app
 
 #### The code
 
-I have put it on a workshop's GitHub repository, within the **/application** folder. You can run it in your local environment by navigating to the /application folder and running the `docker compose up -d` command. The core application runs at **localhost:8080** while the admin application runs at **localhost:9090**.
+I have put it on a workshop's GitHub repository, within the **/application** folder. You can run the application in your local environment by navigating to the /application folder and running the `docker compose up -d` command. The core application will run at **localhost:8080** while the admin application will run at **localhost:9090**.
 
-The default administrator account is **admin** for both username and password.
+The default administrator credentials are **admin** for both the username and password.
 
 https://github.com/weebNeedWeed/ws-deploying-spring-ecs-fargate/tree/master/application
 

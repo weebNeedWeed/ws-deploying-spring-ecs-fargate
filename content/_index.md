@@ -19,7 +19,7 @@ This workshop is designed for beginners who are new to AWS and want to learn abo
 
 #### Prerequisites
 
-You must have knowledge about the networking basics on AWS, and also the fundamentals of Docker and containers. If you don't, no worries, you should take the following workshops first:
+You should have a basic understanding of AWS networking, as well as the fundamentals of Docker and containers. If you don't, no worries-I recommend you to take the following workshops first:
 
 - [Amazon VPC and AWS Site-to-Site VPN Workshop](https://000003.awsstudygroup.com/)
 
