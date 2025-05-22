@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN ./mvnw package -DskipTests
+RUN chmod +x ./mvnw && ./mvnw package -DskipTests
 
 FROM --platform=linux/amd64 public.ecr.aws/docker/library/eclipse-temurin:24-jre-alpine
 
