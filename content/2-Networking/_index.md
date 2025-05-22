@@ -24,6 +24,4 @@ After creating a VPC, we need to add subnets into it. We will require total of s
 
 So, what is the different between a public and a private subnet? A public subnet allows resources within it to be directly reachable from the internet, and these resources can be assigned public IP addresses. On the other hand, resources in a private subnet can initiate abound connection to the internet (typically through a NAT Gateway, we will talk about it later), but they cannot neither be directly accessed or reached from the internet nor assigned public IP addresses; this means external users cannot directly connect to them.
 
-> chen cai hinh o day
-
 As in the diagram, The database subnets (Db subnets) are also private, specifically designated for hosting our database instances. Meanwhile, the private subnets will be used for deploying our ECS Cluster.

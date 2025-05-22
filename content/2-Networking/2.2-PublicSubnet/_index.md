@@ -40,8 +40,6 @@ Although the internet gateway has been attached to our VPC, the resources within
 
 Our public route table will have two routes. One is the local (10.10.0.0/16 -> local) route, which is automatically created and enables communication between resources within the VPC. The other route (0.0.0.0/0 -> internet gateway) allows traffic destined for the internet to be sent via the internet gateway.
 
-> chen hinh
-
 1\. Select **Route tables** and click on **Create route table**.
 
 ![image](/images/2.2/Group21.png)
@@ -66,4 +64,4 @@ Our public route table will have two routes. One is the local (10.10.0.0/16 -> l
 
 ![image](/images/2.2/Group26.png)
 
-Now the resources in two public subnets are reachable. 
+Now the resources in two public subnets are accessable from the internet. 
