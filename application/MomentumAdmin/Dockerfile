@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 public.ecr.aws/docker/library/node:22.15.1-bookworm AS build
+FROM --platform=linux/amd64 public.ecr.aws/docker/library/node:22.16.0-alpine3.21 AS build
 
 WORKDIR /app
 
