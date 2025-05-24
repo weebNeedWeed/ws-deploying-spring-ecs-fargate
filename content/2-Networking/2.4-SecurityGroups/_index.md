@@ -37,13 +37,19 @@ ___
 ![image](/images/2.4/Group36.png)
 
 3\. For **Security group name**, enter in `fcj-public-sg`. For **VPC**, select **fcj-vpc**.
-For **Description**, enter in `Allows inbound HTTP 80 from the internet`.
+For **Description**, enter in `Allows inbound HTTP 80, 81 from the internet`.
 
 ![image](/images/2.4/Group38.png)
 
-4\. For **Inbound rules**, **add a new rule**. For **Type**, select **HTTP**. For **Source**, select **Anywhere-IPv4**. This rule will allow all inbound traffic from the internet to be routed to the public subnets. Scroll down and click on **Create security group**.
+4\. For **Inbound rules**, **add a new rule**. For **Type**, select **HTTP**. For **Source**, select **Anywhere-IPv4**. This rule will allow all inbound HTTP traffic from the internet to be routed to the public subnets. This rule is for the core application to be accessed through the port 80.
 
 ![image](/images/2.4/Group39.png)
+
+5\. **Add another rule** for the admin application to be accessed through port 81. For **Type**, select **TCP**. For **Port range**, enter in `81`. For **Source**, select **Anywhere-IPv4**.
+
+![image](/images/2.4/Group44.png)
+
+6\. Scroll down and click on **Create security group**.
 
 ___
 

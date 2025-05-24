@@ -54,7 +54,7 @@ ___
 
 2\. Go back to your ECS Task definition, **Create new revision with JSON** of **fcj-core-fargate-td**.
 
-![image](/images/3.7/Group81.png)
+![image](/images/3.7/Group80.png)
 
 3\. Navigate to the **containerDefinitions** array. Inside this array, find the specific container definition where you want to inject the secret. In our case, this is the first (and only) container definition with **"name": "core"**. Then **add the following secret block into it**.
 
@@ -114,4 +114,80 @@ Your **containerDefinitions** array will look like this:
 
 4\. Click on **Create**. 
 
-![image](/images/3.7/Group82.png)
+![image](/images/3.7/Group81.png)
+
+5\. Now the latest revision should be 2.
+
+![image](/images/3.7/Group85.png)
+
+___
+
+#### Launching The Core Application Service
+
+1\. Access your cluster, scroll down to **Services** and click on **Create**.
+
+![image](/images/3.7/Group84.png)
+
+2\. For **Task definition family**, select **fcj-core-fargate-td**.For **Task definition revision**, select the **LATEST** version **(2)**.
+
+![image](/images/3.7/Group86.png)
+
+3\. For **Service name**, enter in `fcj-core-svc`.
+
+![image](/images/3.7/Group87.png)
+
+4\. For **Compute options**, select **Launch type** and then select **FARGATE**.
+
+![image](/images/3.7/Group88.png)
+
+5\. For **Desired tasks**, enter in `1`.
+
+![image](/images/3.7/Group89.png)
+
+6\. Scroll to **Networking** and expand it.
+
+![image](/images/3.7/Group90.png)
+
+7\. For **VPC**, select **fcj-vpc**. For **Subnets**, select the **two private subnets**.
+
+![image](/images/3.7/Group91.png)
+
+8\. For **Security group**, select **Use an existing security group** and then select **fcj-private-sg**.
+
+![image](/images/3.7/Group92.png)
+
+9\. Turn off **Public IP**.
+
+![image](/images/3.7/Group93.png)
+
+10\. Scroll down to **Load balancing**. Then, check **Use load balancing**. For **Load balancer type**, select **Application Load Balancer**.
+
+![image](/images/3.7/Group94.png)
+
+11\. Select **Use an existing load balancer** and select **fcj-alb**.
+
+![image](/images/3.7/Group95.png)
+
+12\. For **Listener**, select **Use an existing listener** and then select **HTTP:80**.
+
+![image](/images/3.7/Group96.png)
+
+13\. For **Target group**, select **Use an existing target group** and then select **fcj-core-tg**.
+
+![image](/images/3.7/Group97.png)
+
+14\. Scroll to the bottom and click on **Create**.
+
+![image](/images/3.7/Group98.png)
+
+15\. Wait for one task to be in **Running** state.
+
+![image](/images/3.7/Group110.png)
+
+16\. Then, go to your ALB. Copy the **DNS name** and paste into a new browser tab.
+
+![image](/images/3.7/Group111.png)
+
+17\. Here is the result. You can use `admin` for both **Username** and **Password** to log in.
+
+![image](/images/3.7/Group112.png)
