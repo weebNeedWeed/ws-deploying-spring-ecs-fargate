@@ -13,6 +13,11 @@ spring:
     baseline-version: 0
     baseline-on-migrate: true
 
+server:
+  tomcat:
+    relaxed-query-chars: '|,{,},[,],\'
+    relaxed-path-chars: '|,{,},[,],\'
+
 app:
   jwt:
     expires-in-ms: 3600000

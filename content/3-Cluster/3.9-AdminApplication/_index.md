@@ -20,7 +20,7 @@ pre : " <b> 3.9 </b> "
 
 ![image](/images/3.9/Group115.png)
 
-4\. Under **Service Connect service - 1**, for **Port alias**, choose **core-http**. For discovery, enter in `core-http`. For **DNS**, enter in `core`. For **Port**, enter in `8080`.
+4\. Click on **Add port mappings and applications**. Under **Service Connect service - 1**, for **Port alias**, choose **core-http**. For discovery, enter in `core-http`. For **DNS**, enter in `core`. For **Port**, enter in `8080`.
 
 ![image](/images/3.9/Group116.png)
 
