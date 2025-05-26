@@ -29,7 +29,7 @@ public class HomeController {
     }
 
     @GetMapping
-    public String index(FilterTodoRequest request, Model model) {
+    public String index(FilterTodoRequest request, Model model, @AuthenticationPrincipal User user) {
         Iterable<Todo> todos;
 
         Todo.TodoStatus status = request.getStatus().equals("ALL") ? null : Todo.TodoStatus.valueOf(request.getStatus());
@@ -38,7 +38,7 @@ public class HomeController {
         String[] sortBys = request.getSortBy().split("-");
         Sort sort = Sort.by(Sort.Direction.valueOf(sortBys[1].toUpperCase()), sortBys[0]);
 
-        todos = todoRepository.findByStatusAndPriorityLevel(status, priorityLevel, sort);
+        todos = todoRepository.findByStatusAndPriorityLevel(status, priorityLevel, user.getId(), sort);
 
         model.addAttribute("todos", todos);
         return "home";
