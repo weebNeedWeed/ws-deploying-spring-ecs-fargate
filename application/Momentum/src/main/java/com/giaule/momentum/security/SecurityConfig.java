@@ -58,7 +58,7 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(r ->
-                        r.requestMatchers("/css/**", "/js/**", "/images/**", "/register").permitAll()
+                        r.requestMatchers("/css/**", "/js/**", "/images/**", "/register", "/health").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(f ->
                         f.loginPage("/login")

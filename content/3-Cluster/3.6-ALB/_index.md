@@ -24,15 +24,23 @@ pre : " <b> 3.6 </b> "
 
 ![image](/images/3.6/Group65.png)
 
-5\. Expand **Advanced health check settings**.
+5\. For **Health check path**, enter `/health`.
+
+![image](/images/3.6/Group182.png)
+
+6\. Expand **Advanced health check settings**.
 
 ![image](/images/3.6/Group66.png)
 
-6\. For **Healthy threshsold**, type in `2`.
+7\. For **Healthy threshsold**, type in `2`.
 
 ![image](/images/3.6/Group67.png)
 
-7\. Click on **Next**.
+8\. For **Interval**, enter `10`.
+
+![image](/images/3.6/Group69.png)
+
+9\. Click on **Next**.
 
 ![image](/images/3.6/Group68.png)
 
