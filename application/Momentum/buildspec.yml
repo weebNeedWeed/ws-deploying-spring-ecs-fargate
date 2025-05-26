@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   secrets-manager:
-    SPRING_DATASOURCE_URL: "dev/fcj/momentum:DB_CONNECTION_STRING"
+    FLYWAY_URL: "dev/fcj/momentum:DB_CONNECTION_STRING"
 
 phases:
   pre_build:
@@ -20,8 +20,7 @@ phases:
       - IMAGE_TAG="core-$COMMIT_HASH"
       - cd application/Momentum/
       - chmod +x mvnw
-      - echo $SPRING_DATASOURCE_URL
-      - ./mvnw flyway:migrate
+      - ./mvnw flyway:migrate -Dflyway.url=$FLYWAY_URL
   build:
     commands:
       # Log build start time
