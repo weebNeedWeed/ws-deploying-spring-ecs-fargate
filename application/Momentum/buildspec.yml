@@ -20,7 +20,7 @@ phases:
       - IMAGE_TAG="core-$COMMIT_HASH"
       - cd application/Momentum/
       - chmod +x mvnw
-      - mvnw flyway:migrate
+      - ./mvnw flyway:migrate
   build:
     commands:
       # Log build start time
