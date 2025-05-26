@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  secrets-manager:
+    SPRING_FLYWAY_URL: "dev/fcj/momentum:DB_CONNECTION_STRING"
+
 phases:
   pre_build:
     commands:
