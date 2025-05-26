@@ -18,9 +18,14 @@ phases:
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       # Create unique image tag using commit hash
       - IMAGE_TAG="core-$COMMIT_HASH"
+      # Change to application directory
       - cd application/Momentum/
+      # Make Maven wrapper executable
       - chmod +x mvnw
+      # Run database migration using Flyway
       - ./mvnw flyway:migrate -Dflyway.url=$FLYWAY_URL
+      # Return to previous directory
+      - cd -
   build:
     commands:
       # Log build start time
