@@ -20,6 +20,7 @@ phases:
       - IMAGE_TAG="core-$COMMIT_HASH"
       - cd application/Momentum/
       - chmod +x mvnw
+      - echo $SPRING_DATASOURCE_URL
       - ./mvnw flyway:migrate
   build:
     commands:
