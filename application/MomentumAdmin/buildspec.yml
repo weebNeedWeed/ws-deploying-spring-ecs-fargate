@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      # Display login message and AWS version info
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      # Authenticate Docker with Amazon ECR using AWS CLI
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      # Set the ECR repository URI for the Docker image
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_NAME
+      # Extract first 7 characters of commit hash for image tagging
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      # Create unique image tag using commit hash
+      - IMAGE_TAG="admin-$COMMIT_HASH"
+  build:
+    commands:
+      # Log build start time
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      # Build Docker image from the MomentumAdmin application directory
+      - docker build -t $REPOSITORY_URI:admin application/MomentumAdmin/
+      # Tag the image with the commit-specific tag
+      - docker tag $REPOSITORY_URI:admin $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      # Log build completion time
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      # Push the tagged image to ECR repository
+      - docker push $REPOSITORY_URI:admin
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      # Create image definitions file for ECS deployment
+      - echo Writing image definitions file...
+      - printf '[{"name":"admin","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+# Specify the artifact file to be used by deployment pipeline
+artifacts:
+    files: imagedefinitions.json

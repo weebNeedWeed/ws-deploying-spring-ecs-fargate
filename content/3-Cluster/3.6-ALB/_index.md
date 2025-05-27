@@ -28,19 +28,15 @@ pre : " <b> 3.6 </b> "
 
 ![image](/images/3.6/Group182.png)
 
-6\. Expand **Advanced health check settings**.
+6\. Expand Advanced health check settings.
 
 ![image](/images/3.6/Group66.png)
 
-7\. For **Healthy threshsold**, type in `2`.
+7\. For **Unhealthy threshold**, enter `5`.
 
-![image](/images/3.6/Group67.png)
+![image](/images/3.6/Group183.png)
 
-8\. For **Interval**, enter `10`.
-
-![image](/images/3.6/Group69.png)
-
-9\. Click on **Next**.
+8\. Scroll to the bottom and click **Next**.
 
 ![image](/images/3.6/Group68.png)
 
