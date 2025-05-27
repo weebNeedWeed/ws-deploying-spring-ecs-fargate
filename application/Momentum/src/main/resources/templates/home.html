@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -11,117 +10,118 @@
 </head>
 
 <body>
-<header class="header">
-    <h1>MOMENTUM V2</h1>
-    <form th:action="@{/logout}" method="post">
-        <span id="user-name" sec:authentication="principal.username">User</span>
-        <button type="submit" id="logout-btn" class="btn btn-accent">LOGOUT</button>
-    </form>
-</header>
-
-<div class="container">
-    <div class="controls">
-        <form method="get" class="filter-sort" id="filter-form">
-            <div class="form-group">
-                <label for="filter-status" class="form-label">Filter by Status</label>
-                <select id="filter-status" class="form-input" name="status">
-                    <option value="ALL" th:selected="${#strings.equals(param.status, 'ALL')}">ALL</option>
-                    <option th:each="status : ${T(com.giaule.momentum.entities.Todo$TodoStatus).values()}"
-                            th:selected="${#strings.equals(param.status, status)}"
-                            th:text="${status}" th:value="${status}">placeholder
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="filter-priority" class="form-label">Filter by Priority</label>
-                <select id="filter-priority" class="form-input" name="priorityLevel">
-                    <option value="ALL"
-                            th:selected="${#strings.equals(param.priorityLevel, 'ALL')}">ALL</option>
-                    <option th:each="p : ${T(com.giaule.momentum.entities.Todo$PriorityLevel).values()}" th:text="${p}"
-                            th:selected="${#strings.equals(param.priorityLevel, p)}"
-                            th:value="${p}">placeholder
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="sort-by" class="form-label">Sort By</label>
-                <select id="sort-by" class="form-input" name="sortBy">
-                    <option th:selected="${#strings.equals(param.sortBy, 'due-desc')}" value="due-desc">Date (Newest)</option>
-                    <option th:selected="${#strings.equals(param.sortBy, 'due-asc')}" value="due-asc">Date (Oldest)</option>
-                    <option th:selected="${#strings.equals(param.sortBy, 'priorityLevel-desc')}" value="priorityLevel-desc">Priority (High to Low)</option>
-                    <option th:selected="${#strings.equals(param.sortBy, 'priorityLevel-asc')}" value="priorityLevel-asc">Priority (Low to High)</option>
-                </select>
-            </div>
+    <header class="header">
+        <h1>MOMENTUM</h1>
+        <form th:action="@{/logout}" method="post">
+            <span id="user-name" sec:authentication="principal.username">User</span>
+            <button type="submit" id="logout-btn" class="btn btn-accent">LOGOUT</button>
         </form>
+    </header>
 
-        <a th:href="@{/add}" id="add-todo-btn" class="btn btn-primary">ADD NEW TODO</a>
-    </div>
-
-    <div id="todos-container">
-        <!-- Todo items will be dynamically inserted here -->
-        <div class="card todo-item" th:each="todo : ${todos}" th:object="${todo}">
-            <div class="todo-header">
-                <h2 class="todo-title" th:text="*{title}"></h2>
-                <div class="todo-badges">
-                    <span th:class="|priority priority-*{priorityLevel.toString().toLowerCase()}|"
-                          th:text="*{priorityLevel}"></span>
-                    <span th:class="|status status-*{status.toString().toLowerCase()}|" th:text="*{status}"></span>
+    <div class="container">
+        <div class="controls">
+            <form method="get" class="filter-sort" id="filter-form">
+                <div class="form-group">
+                    <label for="filter-status" class="form-label">Filter by Status</label>
+                    <select id="filter-status" class="form-input" name="status">
+                        <option value="ALL" th:selected="${#strings.equals(param.status, 'ALL')}">ALL</option>
+                        <option th:each="status : ${T(com.giaule.momentum.entities.Todo$TodoStatus).values()}"
+                            th:selected="${#strings.equals(param.status, status)}" th:text="${status}"
+                            th:value="${status}">placeholder
+                        </option>
+                    </select>
                 </div>
-            </div>
-            <p class="todo-description" th:text="*{description}"></p>
-            <div class="todo-footer">
-                <div class="todo-due-date">Due: <span
-                        th:text="${#temporals.format(todo.due, 'yyyy/MM/dd HH:mm')}"></span></div>
-                <div class="todo-actions">
-                    <a th:href="@{/{id}/edit(id=*{id})}" class="btn btn-accent edit-todo" style="padding: 6px 16px; text-decoration: none;">
-                        EDIT
-                    </a>
-                    <form method="post" th:action="@{/{id}/change-status(id=${todo.id})}">
-                        <div th:switch="${todo.status.toString()}">
-                            <input th:case="'TODO'"
-                                   type="hidden"
-                                   name="status"
-                                   th:value="${T(com.giaule.momentum.entities.Todo$TodoStatus).IN_PROGRESS}" />
-                            <input th:case="'IN_PROGRESS'"
-                                   type="hidden"
-                                   name="status"
-                                   th:value="${T(com.giaule.momentum.entities.Todo$TodoStatus).DONE}" />
-                            <input th:case="'DONE'"
-                                   type="hidden"
-                                   name="status"
-                                   th:value="${T(com.giaule.momentum.entities.Todo$TodoStatus).TODO}" />
-                        </div>
 
-                        <div th:switch="${todo.status.toString()}">
-                            <button type="submit" th:case="'TODO'" class="btn btn-primary change-status">MARK AS IN PROGRESS</button>
-                            <button type="submit" th:case="'IN_PROGRESS'" class="btn btn-primary change-status">MARK AS DONE</button>
-                            <button type="submit" th:case="'DONE'" class="btn btn-primary change-status">REOPEN</button>
-                        </div>
-                    </form>
+                <div class="form-group">
+                    <label for="filter-priority" class="form-label">Filter by Priority</label>
+                    <select id="filter-priority" class="form-input" name="priorityLevel">
+                        <option value="ALL" th:selected="${#strings.equals(param.priorityLevel, 'ALL')}">ALL</option>
+                        <option th:each="p : ${T(com.giaule.momentum.entities.Todo$PriorityLevel).values()}"
+                            th:text="${p}" th:selected="${#strings.equals(param.priorityLevel, p)}" th:value="${p}">
+                            placeholder
+                        </option>
+                    </select>
+                </div>
 
-                    <form th:action="@{/{id}/delete(id=*{id})}" method="post">
-                        <button type="submit" class="btn btn-primary delete-todo">DELETE</button>
-                    </form>
+                <div class="form-group">
+                    <label for="sort-by" class="form-label">Sort By</label>
+                    <select id="sort-by" class="form-input" name="sortBy">
+                        <option th:selected="${#strings.equals(param.sortBy, 'due-desc')}" value="due-desc">Date
+                            (Newest)</option>
+                        <option th:selected="${#strings.equals(param.sortBy, 'due-asc')}" value="due-asc">Date (Oldest)
+                        </option>
+                        <option th:selected="${#strings.equals(param.sortBy, 'priorityLevel-desc')}"
+                            value="priorityLevel-desc">Priority (High to Low)</option>
+                        <option th:selected="${#strings.equals(param.sortBy, 'priorityLevel-asc')}"
+                            value="priorityLevel-asc">Priority (Low to High)</option>
+                    </select>
+                </div>
+            </form>
+
+            <a th:href="@{/add}" id="add-todo-btn" class="btn btn-primary">ADD NEW TODO</a>
+        </div>
+
+        <div id="todos-container">
+            <!-- Todo items will be dynamically inserted here -->
+            <div class="card todo-item" th:each="todo : ${todos}" th:object="${todo}">
+                <div class="todo-header">
+                    <h2 class="todo-title" th:text="*{title}"></h2>
+                    <div class="todo-badges">
+                        <span th:class="|priority priority-*{priorityLevel.toString().toLowerCase()}|"
+                            th:text="*{priorityLevel}"></span>
+                        <span th:class="|status status-*{status.toString().toLowerCase()}|" th:text="*{status}"></span>
+                    </div>
+                </div>
+                <p class="todo-description" th:text="*{description}"></p>
+                <div class="todo-footer">
+                    <div class="todo-due-date">Due: <span
+                            th:text="${#temporals.format(todo.due, 'yyyy/MM/dd HH:mm')}"></span></div>
+                    <div class="todo-actions">
+                        <a th:href="@{/{id}/edit(id=*{id})}" class="btn btn-accent edit-todo"
+                            style="padding: 6px 16px; text-decoration: none;">
+                            EDIT
+                        </a>
+                        <form method="post" th:action="@{/{id}/change-status(id=${todo.id})}">
+                            <div th:switch="${todo.status.toString()}">
+                                <input th:case="'TODO'" type="hidden" name="status"
+                                    th:value="${T(com.giaule.momentum.entities.Todo$TodoStatus).IN_PROGRESS}" />
+                                <input th:case="'IN_PROGRESS'" type="hidden" name="status"
+                                    th:value="${T(com.giaule.momentum.entities.Todo$TodoStatus).DONE}" />
+                                <input th:case="'DONE'" type="hidden" name="status"
+                                    th:value="${T(com.giaule.momentum.entities.Todo$TodoStatus).TODO}" />
+                            </div>
+
+                            <div th:switch="${todo.status.toString()}">
+                                <button type="submit" th:case="'TODO'" class="btn btn-primary change-status">MARK AS IN
+                                    PROGRESS</button>
+                                <button type="submit" th:case="'IN_PROGRESS'" class="btn btn-primary change-status">MARK
+                                    AS DONE</button>
+                                <button type="submit" th:case="'DONE'"
+                                    class="btn btn-primary change-status">REOPEN</button>
+                            </div>
+                        </form>
+
+                        <form th:action="@{/{id}/delete(id=*{id})}" method="post">
+                            <button type="submit" class="btn btn-primary delete-todo">DELETE</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    window.onload = function () {
-        const form = document.getElementById("filter-form");
-        const filterStatus = document.getElementById("filter-status")
-        const filterPriority = document.getElementById("filter-priority")
-        const sortBy = document.getElementById("sort-by");
+    <script>
+        window.onload = function () {
+            const form = document.getElementById("filter-form");
+            const filterStatus = document.getElementById("filter-status")
+            const filterPriority = document.getElementById("filter-priority")
+            const sortBy = document.getElementById("sort-by");
 
-        filterStatus.onchange = () => form.submit();
-        filterPriority.onchange = () => form.submit();
-        sortBy.onchange = () => form.submit();
-    };
-</script>
+            filterStatus.onchange = () => form.submit();
+            filterPriority.onchange = () => form.submit();
+            sortBy.onchange = () => form.submit();
+        };
+    </script>
 
 </body>
 
