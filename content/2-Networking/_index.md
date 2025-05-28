@@ -6,22 +6,34 @@ chapter : false
 pre : " <b> 2. </b> "
 ---
 
-An Amazon ECS cluster must be placed within a virtual network. Let's examine the following diagram to visualize the network architecture we are about to configure.
+An Amazon ECS cluster requires a virtual robust network foundation. This section outlines the network architecture we will configure, leveraging the core AWS networking components.
 
 ![image](/images/2/1.svg)
 
-Let's discuss a bit about the global infrastructure of AWS. We will begin by discussing **regions**, which serve as the foundational of AWS's global infrastructure. AWS has the concept of a region, which is a physical location around the world where AWS cluster its data centers. Withing each region, AWS has logical isolated locations known as **Availability Zones (AZs)**. An AZ is one or more discrete data centers with redundant power, networking, and connectivity within an AWS Region.
+#### AWS Global Infrastructure: Regions and Availability Zones
+
+AWS's global infrastructure is built around **Regions**, which are physical locations worldwide where AWS clusters its data centers. Each Region is a separate geographic area.
+
+Within each Region, there are multiple isolated locations known as **Availability Zones (AZs)**. An AZ consists of one or more discrete data centers, each with redunant power, networking and connectivity. Using multiple AZs is key to designing highly available and fault-tolerant applications. 
 
 ![image](/images/2/2.svg)
 
-Each region and AZ is assigned with a unique code. For example, the Singapore region has the code **ap-southeast-1** and its AZs are designated, respectively, **ap-southeast-1a**, **ap-southeast-1b** and **ap-southeast-1c**.
+Regions and AZs have unique codes. For example, the Singapore region is **ap-southeast-1**, and its AZs are **ap-southeast-1a**, **ap-southeast-1b** and **ap-southeast-1c**.
 
 ![image](/images/2/3.svg)
 
-To setup our own network on AWS, we will utilize **Amazon Virtual Private Cloud VPC**. A **VPC** is a virtual network that closely resembles a traditional network that you'd operate in your own data center. After you create a VPC, you can add **subnets**. A subnet is a range of IP addresses in your VPC. A subnet must reside in a single Availability Zone. After you add subnets, you can deploy AWS resources in your VPC, such as Amazon ECS Cluster, database, etc. 
+#### Your Private Network In The Cloud: Amazon VPC
 
-After creating a VPC, we need to add subnets into it. We will require total of six subnets: two public subnets, two private subnets and two database subnets. 
+To establish our own network on AWS, we will utilize **Amazon Virtual Private Cloud (VPC)**. A **VPC** is an isolated virtual network on AWS, logically separated from other virtual networks. It allows you to provision a private section on AWS where you can launch AWS resources in the network you define, closely resembling to the traditional on-premises network.
 
-So, what is the different between a public and a private subnet? A public subnet allows resources within it to be directly reachable from the internet, and these resources can be assigned public IP addresses. On the other hand, resources in a private subnet can initiate abound connection to the internet (typically through a NAT Gateway, we will talk about it later), but they cannot neither be directly accessed or reached from the internet nor assigned public IP addresses; this means external users cannot directly connect to them.
+#### Organizing Your VPC: Subnets
 
-As in the diagram, The database subnets (Db subnets) are also private, specifically designated for hosting our database instances. Meanwhile, the private subnets will be used for deploying our ECS Cluster.
+Once a VPC is created, we partition it into **subnets**. A subnet is range of IP addresses within your VPC. Each subnet must reside within a single AZ. Deploying resources accross subnets in different AZs enhances fault tolerance. 
+
+For our Amazon ECS deployment, we will configure **six subnets**, strategically distributed across two AZs for high availability.
+
+- **Two public subnets:** Resources in these subnets can be directly accessible from the internet. They can be assigned public IP addresses.
+- **Two private subnets:** These subnets will host our Amazon ECS cluster. Resources in private subnets cannot be directly reached from the internet and are not assigned public IP addresses. However, they can initiate outbound connections to the internet, typically via a Network Address Translation (NAT) Gateway (which we will discuss later). This setup enhances security by shielding your application instances from direct external access.
+- **Two database subnets**: These are specialized private subnets designed to host our database instances securely. Like other private subnets, they restrict direct internet access, protecting your data layer.
+
+This multi-subnet, multi-AZ architecture ensures that our application is resilient and secure.
