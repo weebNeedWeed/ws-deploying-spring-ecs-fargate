@@ -6,6 +6,21 @@ chapter : false
 pre : " <b> 3.3 </b> "
 ---
 
+#### Amazon ECR Overview
+
+Amazon Elastic Container Registry (Amazon ECR) is a fully managed AWS container image registry service. It is designed to be secure, scalable, and reliable, allowing you to store, manage, and deploy container images.
+
+Key features of Amazon ECR include:
+
+- Private Repositories: ECR supports private repositories, with access controlled through resource-based permissions using AWS Identity and Access Management (IAM). This ensures that only specified IAM users or roles (e.g., those assumed by Amazon EC2 instances or ECS tasks) can access your container repositories and images.
+- Broad Compatibility: You can use your preferred command-line interface (CLI) — such as the Docker CLI or AWS CLI — to push, pull, and manage Docker images, Open Container Initiative (OCI) images, and OCI-compatible artifacts.
+
+In this workshop, we will first create an ECR repository. Then, we will build and push two distinct container images to this repository: a core image (for our core application) and an admin image (for our admin application).
+
+___
+
+#### Creating the Repository
+
 1\. Navigate to the **Elastic Container Registry** console.
 
 ![image](/images/3.3/Group33.png)
@@ -25,6 +40,16 @@ pre : " <b> 3.3 </b> "
 5\. We will provide the commands for pushing container images onto Amazon ECR in the next section. You can optionally view them by clicking on **View push commands**. 
 
 ![image](/images/3.3/Group37.png)
+
+___
+
+#### Exploring the Dockerfiles
+
+The Dockerfiles used to build the core and admin images have been written, documented, and pushed to our GitHub repository.
+
+Take a moment to explore them by visiting the following links:
+- Core Image Dockerfile: https://github.com/weebNeedWeed/ws-deploying-spring-ecs-fargate/blob/master/application/Momentum/Dockerfile
+- Admin Image Dockerfile: https://github.com/weebNeedWeed/ws-deploying-spring-ecs-fargate/blob/master/application/MomentumAdmin/Dockerfile
 
 ___
 

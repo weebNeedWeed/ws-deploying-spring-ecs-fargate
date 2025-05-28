@@ -35,6 +35,8 @@ pre : " <b> 2.1 </b> "
 
 6\. **Verify creation**: You should see a success message. The new VPC **fcj-vpc** should appear in your VPC list with the CIDR block **10.10.0.0/16**.
 
+___
+
 #### Creating Subnets
 
 We need total of six subnets, each with a specific IP addresses range. AWS preserves five IP addresses of each subnet by default. Therefore, the **Usable Host IP Addresses** is calculated by subtracting 5 from the **Total Host IP Addresses** within that subnet.

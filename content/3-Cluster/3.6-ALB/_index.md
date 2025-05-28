@@ -6,6 +6,20 @@ chapter : false
 pre : " <b> 3.6 </b> "
 ---
 
+#### The Application Load Balancer - Where It All Began
+
+An Application Load Balancer (ALB) operates at the application layer (Layer 7) of the Open Systems Interconnection (OSI) model. When a request reaches the ALB, it first evaluates listener rules in priority order to determine the appropriate action. Based on this rule, it then selects a target from the designated target group. You can configure listener rules to intelligently route requests to different target groups based on application traffic content, such as the path or host. 
+
+Routing is performed independently for each target group, even if a single target is part of multiple groups. At the target group level, you can specify the routing algorithm. The default is round robin, but you can also opt for the least outstanding requests algorithm.
+
+ALBs offer great flexibility:
+
+- You can add or remove targets as your needs evolve, without disrupting the overall request flow to your application.
+- Elastic Load Balancing automatically scales your load balancer capacity in response to traffic changes, handling the vast majority of workloads seamlessly. 
+- You can configure health checks to monitor the status of registered targets. This ensures the ALB only sends requests to healthy instances, improving your application's fault tolerance. 
+
+___
+
 #### Creating the core application target group
 
 1\. Navigate to **EC2** console.
