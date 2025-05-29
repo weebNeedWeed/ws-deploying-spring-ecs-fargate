@@ -1,5 +1,5 @@
 ---
-title : "Creating The Virtual Firewall - Security Groups"
+title : "Create Security Groups"
 date :  "`r Sys.Date()`" 
 weight : 4
 chapter : false
@@ -35,7 +35,7 @@ This configuration establishes a secure, tiered architecture, ensuring that each
 
 ___
 
-#### Creating The Public Subnets Security Group
+#### Configure Security Group for Public Subnets
 
 1\. In the VPC Dashboard, under **Security** in the left navigation panel, select **Security groups**.
 
@@ -81,7 +81,7 @@ This public security group will be attached to your Application Load Balancer to
 
 ___
 
-#### Creating The Private Subnets Security Group
+#### Configure Security Group for Private Subnets
 
 This security group will allow all inbound traffic from the public subnets security group, implementing the principle of least privilege by only allowing access from authorized sources.
 
@@ -116,7 +116,7 @@ This private security group implements a security layer by only allowing traffic
 
 ___
 
-#### Creating The Database Subnets Security Group
+#### Configure Security Group for Database Subnets 
 
 This security group will allow all inbound traffic from the private subnets security group, implementing the final layer of our tiered security architecture.
 

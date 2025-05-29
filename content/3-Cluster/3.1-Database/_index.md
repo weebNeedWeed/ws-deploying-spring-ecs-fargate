@@ -1,5 +1,5 @@
 ---
-title : "Creating The Amazon RDS PostgreSQL Database"
+title : "Set Up RDS PostgreSQL Database"
 date :  "`r Sys.Date()`" 
 weight : 1
 chapter : false
@@ -20,7 +20,7 @@ While AWS generally recommends provisioning databases across at least two Availa
 
 ___
 
-#### Creating the Subnet Group
+#### Create Subnet Group
 
 A database subnet group is a collection of subnets (typically private) that you create in a VPC and that you then designate for your database instances. By using a database subnet group, you can specify a particular VPC when creating database instances.
 
@@ -57,7 +57,7 @@ The DB subnet group ensures your database instances are deployed in the isolated
 
 ___
 
-#### Creating the Database Instance
+#### Create Database Instance
 
 1\. In the RDS Dashboard, select **Databases** from the left navigation panel, then click **Create database**.
 

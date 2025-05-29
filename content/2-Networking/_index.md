@@ -1,5 +1,5 @@
 ---
-title : "Networking Setup"
+title : "Network Configuration"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false

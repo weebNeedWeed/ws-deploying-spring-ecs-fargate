@@ -1,26 +1,30 @@
 ---
-title : "Getting The Core Application Up & Running"
+title : "Launch the Core Application"
 date :  "`r Sys.Date()`" 
 weight : 7
 chapter : false
 pre : " <b> 3.7 </b> "
 ---
 
-#### Create The Core Application Task Definition
+#### Create the Core Application Task Definition
 
-1\. Navigate to **Elastic Container Service**.
+1\. Navigate to **Amazon Elastic Container Service (ECS)** in the AWS Console.
 
 ![image](/images/3.7/Group82.png)
 
-2\. Select **Task definitions** and click on **Create new task definition**.
+2\. In the left navigation pane, select **Task definitions**, then click **Create new task definition**.
 
 ![image](/images/3.7/Group72.png)
 
-3\. Enter in `fcj-core-fargate-td` for **Task definition family** and choose **AWS Fargate** as the **Launch type**.
+3\. Configure the basic settings:
+   - **Task definition family**: `fcj-core-fargate-td`
+   - **Launch type**: **AWS Fargate**
 
 ![image](/images/3.7/Group73.png)
 
-4\. For **CPU**, choose **.25vCPU**. For **Memory**, choose **.5GB**.
+4\. Set the resource allocation:
+   - **CPU**: **.25 vCPU**
+   - **Memory**: **.5 GB**
 
 ![image](/images/3.7/Group74.png)
 
@@ -28,37 +32,41 @@ pre : " <b> 3.7 </b> "
 
 ![image](/images/3.7/Group75.png)
 
-6\. **Open a new browser tab** and navigate to your **ECR** repository. Copy the **core** image URI.
+6\. **Open a new browser tab** and navigate to **Amazon ECR**. Locate your **fcj-registry** repository and copy the **core** image URI.
 
 ![image](/images/3.7/Group76.png)
 
-7\. Go back to the **Create new task definition** tab. Under **Container details**, for **Name**, enter in `core`. For **Image URI**, enter in the **core image URI you have copied**.
+7\. Return to the **Create new task definition** tab. In the **Container details** section, configure:
+   - **Name**: `core`
+   - **Image URI**: Paste the **core image URI** you copied from ECR
 
 ![image](/images/3.7/Group77.png)
 
-8\. For **Container port**, enter in `8080`. For `Port name`, enter in `core-http`.
+8\. Configure the container networking:
+   - **Container port**: `8080`
+   - **Port name**: `core-http`
 
 ![image](/images/3.7/Group78.png)
 
-9\. Scroll to the bottom and click on **Create**.
+9\. Review your configuration and click **Create** to finalize the task definition.
 
 ![image](/images/3.7/Group79.png)
 
 ___
 
-#### Injecting The Secret
+#### Inject Secrets from AWS Secrets Manager
 
-1\. **Open a new browser tab** and access the **Secrets Manager** console. Go to your secret and **copy the ARN** of it.
+1\. **Open a new browser tab** and navigate to the **AWS Secrets Manager** console. Locate your secret and **copy its ARN**.
 
 ![image](/images/3.7/Group83.png)
 
-2\. Go back to your ECS Task definition, **Create new revision with JSON** of **fcj-core-fargate-td**.
+2\. Return to the **ECS console**. Navigate to **Task definitions**, select **fcj-core-fargate-td**, then click **Create new revision with JSON**.
 
 ![image](/images/3.7/Group80.png)
 
-3\. Navigate to the **containerDefinitions** array. Inside this array, find the specific container definition where you want to inject the secret. In our case, this is the first (and only) container definition with **"name": "core"**. Then **add the following secret block into it**.
+3\. In the JSON editor, locate the **containerDefinitions** array. Find the container definition with **"name": "core"** and add the following **secrets** block:
 
-- **Don't forget to replace `<secret-arn>` with your secret's ARN.**
+   **Important**: Replace `<secret-arn>` with the ARN you copied in step 1.
 
 ```json
 "secrets": [
@@ -69,7 +77,7 @@ ___
 ]
 ```
 
-Your **containerDefinitions** array will look like this:
+4\. Your complete **containerDefinitions** should look like this:
 
 ```json
 "containerDefinitions": [
@@ -107,87 +115,102 @@ Your **containerDefinitions** array will look like this:
                 "name": "SPRING_DATASOURCE_URL",
                 "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:0123456789:secret:dev/fcj/momentum-75swok:DB_CONNECTION_STRING::"
             }
-        ],
+        ]
     }
 ]
 ```
 
-4\. Click on **Create**. 
+5\. Click **Create** to save the new revision.
 
 ![image](/images/3.7/Group81.png)
 
-5\. Now the latest revision should be 2.
+6\. Verify that the latest revision is now **2**.
 
 ![image](/images/3.7/Group85.png)
 
 ___
 
-#### Launching The Core Application Service
+#### Launch the Core Application Service
 
-1\. Access your cluster, scroll down to **Services** and click on **Create**.
+1\. Navigate to your ECS cluster, scroll down to **Services**, and click **Create**.
 
 ![image](/images/3.7/Group84.png)
 
-2\. For **Task definition family**, select **fcj-core-fargate-td**.For **Task definition revision**, select the **LATEST** version **(2)**.
+2\. Configure the task definition:
+   - **Task definition family**: Select **fcj-core-fargate-td**
+   - **Task definition revision**: Select the **LATEST** version **(2)**
 
 ![image](/images/3.7/Group86.png)
 
-3\. For **Service name**, enter in `fcj-core-svc`.
+3\. For **Service name**, enter `fcj-core-svc`.
 
 ![image](/images/3.7/Group87.png)
 
-4\. For **Compute options**, select **Launch type** and then select **FARGATE**.
+4\. Configure compute options:
+   - **Compute options**: Select **Launch type**
+   - **Launch type**: Select **FARGATE**
 
 ![image](/images/3.7/Group88.png)
 
-5\. For **Desired tasks**, enter in `1`.
+5\. For **Desired tasks**, enter `1`.
 
 ![image](/images/3.7/Group89.png)
 
-6\. Scroll to **Networking** and expand it.
+6\. Scroll to **Networking** and expand the section.
 
 ![image](/images/3.7/Group90.png)
 
-7\. For **VPC**, select **fcj-vpc**. For **Subnets**, select the **two private subnets**.
+7\. Configure networking:
+   - **VPC**: Select **fcj-vpc**
+   - **Subnets**: Select the **two private subnets**
 
 ![image](/images/3.7/Group91.png)
 
-8\. For **Security group**, select **Use an existing security group** and then select **fcj-private-sg**.
+8\. Configure security group:
+   - **Security group**: Select **Use an existing security group**
+   - Select **fcj-private-sg**
 
 ![image](/images/3.7/Group92.png)
 
-9\. Turn off **Public IP**.
+9\. **Disable Public IP** assignment.
 
 ![image](/images/3.7/Group93.png)
 
-10\. Scroll down to **Load balancing**. Then, check **Use load balancing**. For **Load balancer type**, select **Application Load Balancer**.
+10\. Configure load balancing:
+  - Scroll down to **Load balancing** section
+  - Check **Use load balancing**
+  - **Load balancer type**: Select **Application Load Balancer**
 
 ![image](/images/3.7/Group94.png)
 
-11\. Select **Use an existing load balancer** and select **fcj-alb**.
+11\. Select **Use an existing load balancer** and choose **fcj-alb**.
 
 ![image](/images/3.7/Group95.png)
 
-12\. For **Listener**, select **Use an existing listener** and then select **HTTP:80**.
+12\. Configure listener:
+    - **Listener**: Select **Use an existing listener**
+    - Select **HTTP:80**
 
 ![image](/images/3.7/Group96.png)
 
-13\. For **Target group**, select **Use an existing target group** and then select **fcj-core-tg**.
+13\. Configure target group:
+    - **Target group**: Select **Use an existing target group**
+    - Select **fcj-core-tg**
 
 ![image](/images/3.7/Group97.png)
 
-14\. Scroll to the bottom and click on **Create**.
+14\. Review your configuration and click **Create** to launch the service.
 
 ![image](/images/3.7/Group98.png)
 
-15\. Wait for one task to be in **Running** state.
+15\. Wait for the task status to change to **Running**.
 
 ![image](/images/3.7/Group110.png)
 
-16\. Then, go to your ALB. Copy the **DNS name** and paste into a new browser tab.
+16\. Navigate to your Application Load Balancer (ALB), copy the **DNS name**, and paste it into a new browser tab.
 
 ![image](/images/3.7/Group111.png)
 
-17\. Here is the result. You can use `admin` for both **Username** and **Password** to log in.
+17\. You should see the application login page. Use `admin` for both **Username** and **Password** to log in.
 
 ![image](/images/3.7/Group112.png)

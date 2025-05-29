@@ -1,14 +1,14 @@
 ---
-title : "Updating Services To Use The Task Role"
+title : "Update Services to Use Task Role"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false
 pre : " <b> 4.2 </b> "
 ---
 
-#### Updating The Task Definitions
+#### Update the Task Definitions
 
-1\. In the **ECS** console, navigate to **Task definitions**. Select **fcj-core-fargate-td** and click on **Create new revision**.
+1\. In the **ECS** console, navigate to **Task definitions**. Select **fcj-core-fargate-td** and click **Create new revision**.
 
 ![image](/images/4.2/Group158.png)
 
@@ -27,15 +27,15 @@ pre : " <b> 4.2 </b> "
 
 ___
 
-#### Updating The Services
+#### Update the Services
 
 1\. Navigate to your **ECS cluster** and click on the **Services** tab. Select the **fcj-core-svc** service and click **Update**.
 
 ![image](/images/4.2/Group161.png)
 
-2\. In the **Update service** page, under **Deployment configuration**:
+2\. In the **Update service** page, configure deployment settings:
    - Check **Force new deployment**
-   - For **Task definition revision**, select **LATEST** (this will use the newly created revision with the task role)
+   - For **Task definition revision**, select **LATEST**
 
 ![image](/images/4.2/Group162.png)
 
@@ -43,7 +43,7 @@ ___
 
 ![image](/images/4.2/Group163.png)
 
-4\. Wait a couple of minutes for the service to be updated. You can monitor the deployment progress in the **Deployments** tab.
+4\. Wait for the service to be updated. You can monitor the deployment progress in the **Deployments** tab.
 
 5\. Repeat the same process for **fcj-admin-svc** service:
    - Select **fcj-admin-svc** and click **Update**

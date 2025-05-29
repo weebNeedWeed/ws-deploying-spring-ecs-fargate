@@ -1,5 +1,5 @@
 ---
-title : "Creating The Secret Containing The Database Connection String"
+title : "Create Secret for Database Connection String"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false
@@ -19,7 +19,7 @@ In this workshop, we will create a secret containing our database's connection d
 
 ___
 
-#### Creating the Secret
+#### Create Secret
 
 1\. **Wait for database availability**: Ensure your RDS database shows "Available" status. In the RDS Dashboard, click on your **fcj-db** database instance.
 

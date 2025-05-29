@@ -1,14 +1,20 @@
 ---
-title : "Creating The VPC Endpoint For The Session Manager"
+title : "(Optional) Create VPC Endpoint for Session Manager"
 date :  "`r Sys.Date()`" 
 weight : 3
 chapter : false
 pre : " <b> 4.3 </b> "
 ---
 
-#### Enabling DNS Hostnames
+Instead of routing Amazon ECS Exec traffic through a NAT Gateway to the internet, you can create a VPC Endpoint. This endpoint establishes a private connection between your VPC and the necessary AWS service (like AWS Systems Manager for ECS Exec) using elastic network interfaces (ENIs) within your subnets.
 
-1\. Access your VPC's console and click **Actions**.
+When your resources communicate with the AWS service, DNS resolves the service's hostname to the private IP addresses of these ENIs. Traffic is then directed to the AWS service securely over the AWS private network, bypassing the public internet entirely. Thus, with a VPC Endpoint, ECS Exec traffic remains within your VPC and the AWS network, enhancing security and potentially reducing data transfer costs associated with a NAT Gateway.
+
+___
+
+#### Enable DNS Hostnames
+
+1\. Navigate to the **VPC** console and select your VPC. Click **Actions**.
 
 ![image](/images/4.3/Group166.png)
 
@@ -16,23 +22,28 @@ pre : " <b> 4.3 </b> "
 
 ![image](/images/4.3/Group167.png)
 
-3\. **Enable** both **DNS resolution** and **DNS hostnames**. Click **Save**.
+3\. Enable both settings and save:
+   - Check **Enable DNS resolution**
+   - Check **Enable DNS hostnames**
+   - Click **Save**
 
 ![image](/images/4.3/Group168.png)
 
 ___
 
-#### Creating VPC Endpoint
+#### Create VPC Endpoint
 
-1\. In the left navigation pane, scroll down and click **Endpoints**.
+1\. In the left navigation pane, click **Endpoints**.
 
 ![image](/images/4.3/Group165.png)
 
-2\. For **Name tag**, enter `fcj-ssmmessages-ep`. For **Type**, select **AWS services**.
+2\. Click **Create endpoint** and configure the basic settings:
+   - **Name tag**: Enter `fcj-ssmmessages-ep`
+   - **Service category**: Select **AWS services**
 
 ![image](/images/4.3/Group169.png)
 
-3\. Enter in the search box `ssmmessages`. Select the corresponding service.
+3\. In the search box, enter `ssmmessages` and select the corresponding service.
 
 ![image](/images/4.3/Group170.png)
 
@@ -42,7 +53,9 @@ ___
 
 ![image](/images/4.3/Group172.png)
 
-5\. For **Subnets**, select the **AZ a** and then select **fcj-private-subnet-01**.
+5\. Configure subnet selection:
+   - **Availability Zone**: Select **AZ a**
+   - **Subnet**: Select **fcj-private-subnet-01**
 
 ![image](/images/4.3/Group173.png)
 
@@ -50,8 +63,8 @@ ___
 
 ![image](/images/4.3/Group174.png)
 
-7\. Scroll to the bottom and click **Create endpoint**.
+7\. Review your configuration and click **Create endpoint**.
 
 ![image](/images/4.3/Group175.png)
 
-8\. Wait a couple of minutes for the endpoint to be created before going to the next step.
+8\. Wait for the endpoint to be created (this may take a few minutes) before proceeding to the next step.

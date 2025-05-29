@@ -1,5 +1,5 @@
 ---
-title : "Configuring Private Subnets"
+title : "Configure Private Subnets"
 date :  "`r Sys.Date()`" 
 weight : 3
 chapter : false
@@ -20,7 +20,7 @@ For **increased resiliency**, AWS **recommends** placing NAT gateways **in at le
 
 ___
 
-#### Creating The NAT Gateway
+#### Create NAT Gateway
 
 1\. In the VPC Dashboard, select **NAT gateways** from the left navigation panel and click **Create NAT gateway**.
 
@@ -47,7 +47,7 @@ The NAT gateway is deployed in a public subnet so it can receive an Elastic IP a
 
 ___
 
-#### Configuring The Private Route Table
+#### Configure Private Route Table
 
 Next, we will configure our private route table to route outbound traffic from the private subnets (and also the database subnets, as they are private too) through the NAT gateway.
 

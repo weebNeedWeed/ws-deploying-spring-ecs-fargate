@@ -1,5 +1,5 @@
 ---
-title : "Amazon Elastic Container Service"
+title : "Understanding Amazon ECS"
 date :  "`r Sys.Date()`" 
 weight : 1
 chapter : false

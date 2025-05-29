@@ -1,36 +1,36 @@
 ---
-title : "Adding More Permissions To The CodeBuild Service Role"
+title : "Add Permissions to CodeBuild Service Role"
 date :  "`r Sys.Date()`" 
 weight : 4
 chapter : false
 pre : " <b> 5.4 </b> "
 ---
 
-1\. Go to the **IAM** dashboard. Select **Roles**.
+1\. Navigate to the **IAM** console and select **Roles**.
 
 ![image](/images/5.4/Group44.png)
 
-2\. **Find the CodeBuild service role** and click on it.
+2\. Find the **CodeBuild service role** and click on it.
 
 ![image](/images/5.4/Group45.png)
 
-3\. Click **Add permissions** and then click **Attach policies**.
+3\. Click **Add permissions**, then select **Attach policies**.
 
 ![image](/images/5.4/Group46.png)
 
-4\. Search for and check **AmazonEC2ContainerRegistryFullAccess**.
+4\. Search for and select **AmazonEC2ContainerRegistryFullAccess**.
 
 ![image](/images/5.4/Group47.png)
 
-5\. Search for and check **SecretsManagerReadWrite**. Click **Add permissions**.
+5\. Search for and select **SecretsManagerReadWrite**. Click **Add permissions**.
 
 ![image](/images/5.4/Group48.png)
 
-6\. Go back to your pipeline and rerun the build stage.
+6\. Navigate back to your pipeline and rerun the build stage.
 
 ![image](/images/5.4/Group49.png)
 
-7\. Wait around 10 minutes until the deploy stage is succeed.
+7\. Wait approximately 10 minutes for the deploy stage to complete successfully.
 
 ![image](/images/5.4/Group50.png)
 

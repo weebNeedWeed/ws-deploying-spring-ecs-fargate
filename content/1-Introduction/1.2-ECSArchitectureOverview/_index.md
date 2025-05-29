@@ -1,5 +1,5 @@
 ---
-title : "What Inside An Amazon ECS Cluster"
+title : "Anatomy of an Amazon ECS Cluster"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false

@@ -1,14 +1,14 @@
 ---
-title : "Deploying The Admin Application"
+title : "Deploy Admin Application"
 date :  "`r Sys.Date()`" 
 weight : 9
 chapter : false
 pre : " <b> 3.9 </b> "
 ---
 
-#### Enabling Service Connect For The Core Application
+#### Enable Service Connect for the Core Application
 
-1\. Click on **Update service** to update **fcj-core-svc**.
+1\. Click **Update service** to update **fcj-core-svc**.
 
 ![image](/images/3.9/Group118.png)
 
@@ -16,59 +16,78 @@ pre : " <b> 3.9 </b> "
 
 ![image](/images/3.9/Group114.png)
 
-3\. Scroll down to **Service connect**. Check **Use Service Connect**. For **Service Connect configuration**, choose **Client and server**. For **Namespace**, select **fcj-ecs-cluster-ns**.
+3\. Scroll down to **Service connect** and configure:
+   - Check **Use Service Connect**
+   - **Service Connect configuration**: Select **Client and server**
+   - **Namespace**: Select **fcj-ecs-cluster-ns**
 
 ![image](/images/3.9/Group115.png)
 
-4\. Click on **Add port mappings and applications**. Under **Service Connect service - 1**, for **Port alias**, choose **core-http**. For discovery, enter in `core-http`. For **DNS**, enter in `core`. For **Port**, enter in `8080`.
+4\. Click **Add port mappings and applications**. Under **Service Connect service - 1**, configure:
+   - **Port alias**: Select **core-http**
+   - **Discovery name**: Enter `core-http`
+   - **DNS**: Enter `core`
+   - **Port**: Enter `8080`
+
+This configuration allows the admin application to make requests to the core application using the URI `http://core:8080`, which corresponds to the specified **DNS** and **Port**.
 
 ![image](/images/3.9/Group116.png)
 
-5\. Scroll to the bottom and click on **Update**.
+5\. Scroll to the bottom and click **Update**.
 
 ![image](/images/3.9/Group117.png)
 
 ___
 
-#### Creating The Admin Application Task Definition
+#### Create the Admin Application Task Definition
 
-1\. Click on **Create new task definition**.
+1\. Click **Create new task definition**.
 
 ![image](/images/3.9/Group119.png)
 
-2\. For **Task definition family**, enter in `fcj-admin-fargate-td`. Choose **AWS Fargate** as **Launch type**.
+2\. Configure the basic settings:
+   - **Task definition family**: `fcj-admin-fargate-td`
+   - **Launch type**: **AWS Fargate**
 
 ![image](/images/3.9/Group120.png)
 
-3\. For **CPU**, select **.25 vCPU**. For **Memory**, select **.5 GB**.
+3\. Set the resource allocation:
+   - **CPU**: **.25 vCPU**
+   - **Memory**: **.5 GB**
 
 ![image](/images/3.9/Group121.png)
 
-4\. Select **fcjEcsTaskExecutionRole** as **Task execution role**.
+4\. For **Task execution role**, select **fcjEcsTaskExecutionRole**.
 
 ![image](/images/3.9/Group122.png)
 
-5\. **Open a new browser tab** for ECR and copy the **admin image URI**.
+5\. **Open a new browser tab** and navigate to **Amazon ECR**. Copy the **admin image URI**.
 
 ![image](/images/3.9/Group123.png)
 
-6\. For container's **Name**, type in `admin`. For **Image URI**, enter in the image URI you have copied.
+6\. Return to the task definition tab. In the **Container details** section, configure:
+   - **Name**: `admin`
+   - **Image URI**: Paste the **admin image URI** you copied
 
 ![image](/images/3.9/Group124.png)
 
-7\. For **Container port**, use `80`. For **Port name**, use `admin-http`.
+7\. Configure the container networking:
+   - **Container port**: `80`
+   - **Port name**: `admin-http`
 
 ![image](/images/3.9/Group125.png)
 
-8\. Click on **Add environment variable**.
+8\. Click **Add environment variable**.
 
 ![image](/images/3.9/Group126.png)
 
-9\. For **key**, enter in `REACT_BASE_URL`. For **Value**, enter in `http://core:8080/api/`.
+9\. Configure the environment variable:
+   - **Key**: `REACT_BASE_URL`
+   - **Value**: `http://core:8080/api/`
 
 ![image](/images/3.9/Group127.png)
 
-10\. Scroll to the bottom and click on **Create**.
+10\. Review your configuration and click **Create**.
 
 ![image](/images/3.9/Group128.png)
 
@@ -76,31 +95,41 @@ ___
 
 #### Creating The Admin Application Service
 
-1\. Click on **Create** to create a new service.
+1\. Click **Create** to create a new service.
 
 ![image](/images/3.9/Group129.png)
 
-2\. For **Task definition family**, select **fcj-admin-fargate-td**. For **Service name**, type in `fcj-admin-svc`.
+2\. Configure the task definition and service:
+   - **Task definition family**: Select **fcj-admin-fargate-td**
+   - **Service name**: Enter `fcj-admin-svc`
 
 ![image](/images/3.9/Group130.png)
 
-3\. Select **FARGATE** as **Launch type**.
+3\. Configure compute options:
+   - **Launch type**: Select **FARGATE**
 
 ![image](/images/3.9/Group131.png)
 
-4\. For **Desired tasks**, enter in `1`.
+4\. For **Desired tasks**, enter `1`.
 
 ![image](/images/3.9/Group132.png)
 
-5\. For **VPC**, select **fcj-vpc**. Select the **two private subnets**.
+5\. Configure networking:
+   - **VPC**: Select **fcj-vpc**
+   - **Subnets**: Select the **two private subnets**
 
 ![image](/images/3.9/Group133.png)
 
-6\. For **Security group name**, select **fcj-private-vpc**. **Turn off Public IP**.
+6\. Configure security and IP settings:
+   - **Security group**: Select **fcj-private-sg**
+   - **Public IP**: **Disable**
 
 ![image](/images/3.9/Group134.png)
 
-7\. Check **Use Service Connect**. For **Service Connect configuration**, select **Client side only**. For **Namespace**, select **fcj-ecs-cluster-ns**.
+7\. Configure Service Connect:
+   - Check **Use Service Connect**
+   - **Service Connect configuration**: Select **Client side only**
+   - **Namespace**: Select **fcj-ecs-cluster-ns**
 
 ![image](/images/3.9/Group135.png)
 
@@ -108,26 +137,34 @@ ___
 
 ![image](/images/3.9/Group139.png)
 
-9\. Select **Use an existing load balancer**. Choose **fcj-alb**.
+9\. Configure load balancer:
+   - Select **Use an existing load balancer**
+   - Choose **fcj-alb**
 
 ![image](/images/3.9/Group136.png)
 
-10\. For **Listener**, **Create new listener**. For **Port**, enter in `81`. For **Target group**, **Create new target group**. For **Targer group name**, enter in `fcj-admin-tg`.
+10\. Configure listener and target group:
+  - **Listener**: Select **Create new listener**
+  - **Port**: Enter `81`
+  - **Target group**: Select **Create new target group**
+  - **Target group name**: Enter `fcj-admin-tg`
 
 ![image](/images/3.9/Group141.png)
 
-11\. Scroll to the bottom and click on **Create**.
+11\. Review your configuration and click **Create**.
 
 ![image](/images/3.9/Group138.png)
 
-12\. Wait a few minutes for the service to be successfully created. Then go to your ALB, copy the **DNS name** and then append `:81` into it. For example `fcj-alb-1993471058.ap-southeast-1.elb.amazonaws.com:81`.
+12\. Wait for the service to be created (this may take a few minutes). Navigate to your ALB, copy the **DNS name**, and append `:81` to it.
+
+**Example**: `fcj-alb-1993471058.ap-southeast-1.elb.amazonaws.com:81`
 
 ![image](/images/3.9/Group142.png)
 
-13\. Paste into your browser and here is the result.
+13\. Paste the URL into your browser to access the admin application.
 
 ![image](/images/3.9/Group143.png)
 
-14\. Use `admin` as both username and password to log in. Here is the dashboard.
+14\. Use `admin` for both **Username** and **Password** to log in and access the dashboard.
 
 ![image](/images/3.9/Group144.png)

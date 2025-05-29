@@ -1,12 +1,12 @@
 ---
-title : "Setting Up VPC And Subnets"
+title : "Create VPC and Subnets"
 date :  "`r Sys.Date()`" 
 weight : 1
 chapter : false
 pre : " <b> 2.1 </b> "
 ---
 
-#### Creating A VPC
+#### Create VPC
 
 1\. Log in to the AWS Console. **Choose a consistent region** (e.g., `us-east-1` or `ap-southeast-1`) where you want to create all resources for this workshop. Make note of your selected region as you'll need to use the same region throughout.
 
@@ -37,7 +37,7 @@ pre : " <b> 2.1 </b> "
 
 ___
 
-#### Creating Subnets
+#### Add Subnets
 
 We need total of six subnets, each with a specific IP addresses range. AWS preserves five IP addresses of each subnet by default. Therefore, the **Usable Host IP Addresses** is calculated by subtracting 5 from the **Total Host IP Addresses** within that subnet.
 

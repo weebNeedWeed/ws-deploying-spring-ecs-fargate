@@ -1,5 +1,5 @@
 ---
-title : "Configuring Public Subnets"
+title : "Configure Public Subnets"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false
@@ -14,7 +14,7 @@ The Application Load Balancer (which will be discussed later) is deployed across
 
 ___
 
-#### Creating The Internet Gateway
+#### Create Internet Gateway
 
 1\. In the VPC Dashboard, select **Internet gateways** from the left navigation panel, then click **Create internet gateway**.
 
@@ -44,7 +44,7 @@ An Internet Gateway provides a target in your route table for internet-routable 
 
 ___
 
-#### Creating The Public Route Table
+#### Create Public Route Table
 
 Although the Internet Gateway has been attached to our VPC, resources within the public subnets may still be unreachable from the internet. This is because we haven't yet configured and associated a route table specifically for these public subnets. This route table acts as a virtual router, containing rules that direct network traffic. For public subnets, it's crucial for directing internet-bound traffic from these subnets to the Internet Gateway.
 

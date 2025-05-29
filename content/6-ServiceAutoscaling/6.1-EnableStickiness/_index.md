@@ -1,16 +1,22 @@
 ---
-title : "Enabling Stickiness"
+title : "Enable Stickiness"
 date :  "`r Sys.Date()`" 
 weight : 1
 chapter : false
 pre : " <b> 6.1 </b> "
 ---
 
-1\. Find the **fcj-core-tg** target group and click on it.
+Since our core application uses session-based authentication, users might lose their session if the Application Load Balancer (ALB) routes their subsequent requests to different backend targets. To prevent this, we need to enable Session Stickiness (also known as target group stickiness). This feature ensures that requests from a specific user are consistently directed to the same target for a defined period, thereby preserving their session continuity. 
+
+___
+
+#### Enable Stickiness
+
+1\. Navigate to the **EC2** console and find the **fcj-core-tg** target group. Click on it.
 
 ![image](/images/6.1/Group1.png)
 
-2\. Select **Attributes** and click on **Edit**.
+2\. Select the **Attributes** tab and click **Edit**.
 
 ![image](/images/6.1/Group2.png)
 
