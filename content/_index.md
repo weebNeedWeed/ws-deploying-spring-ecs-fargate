@@ -1,11 +1,11 @@
 ---
-title : "Serverless Containers: Deploying Your Application On ECS and Fargate"
+title : "Serverless Containers: Deploying Application On ECS and Fargate"
 date : "`r Sys.Date()`"
 weight : 1
 chapter : false
 ---
 
-# Serverless Containers: Deploying Your Application On ECS and Fargate
+# Serverless Containers: Deploying Application On ECS and Fargate
 
 Welcome to my workshop on **Amazon Elastic Container Service(Amazon ECS)** and **AWS Fargate**!
 

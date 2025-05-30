@@ -6,9 +6,9 @@ chapter : false
 pre : " <b> 4.3 </b> "
 ---
 
-Instead of routing Amazon ECS Exec traffic through a NAT Gateway to the internet, you can create a VPC Endpoint. This endpoint establishes a private connection between your VPC and the necessary AWS service (like AWS Systems Manager for ECS Exec) using elastic network interfaces (ENIs) within your subnets.
+Instead of routing Amazon ECS Exec traffic through a NAT Gateway to the internet, you can create a VPC Endpoint. **This endpoint establishes a private connection between your VPC and the necessary AWS service** (like AWS Systems Manager for ECS Exec) **using elastic network interfaces (ENIs)** within your subnets.
 
-When your resources communicate with the AWS service, DNS resolves the service's hostname to the private IP addresses of these ENIs. Traffic is then directed to the AWS service securely over the AWS private network, bypassing the public internet entirely. Thus, with a VPC Endpoint, ECS Exec traffic remains within your VPC and the AWS network, enhancing security and potentially reducing data transfer costs associated with a NAT Gateway.
+When your resources communicate with the AWS service, DNS resolves the service's hostname to the **private IP addresses of these ENIs**. **Traffic is then directed to the AWS service securely over the AWS private network**, bypassing the public internet entirely. Thus, with a VPC Endpoint, **ECS Exec traffic remains within your VPC and the AWS network**, enhancing security and potentially reducing data transfer costs associated with a NAT Gateway.
 
 ___
 

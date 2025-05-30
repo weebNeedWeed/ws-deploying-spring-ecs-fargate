@@ -8,14 +8,14 @@ pre : " <b> 3.3 </b> "
 
 #### Amazon ECR Overview
 
-Amazon Elastic Container Registry (Amazon ECR) is a fully managed AWS container image registry service. It is designed to be secure, scalable, and reliable, allowing you to store, manage, and deploy container images.
+**Amazon Elastic Container Registry (Amazon ECR)** is a fully managed **AWS container image registry service**. It is designed to be secure, scalable, and reliable, allowing you to **store, manage, and deploy container images**.
 
 Key features of Amazon ECR include:
 
-- Private Repositories: ECR supports private repositories, with access controlled through resource-based permissions using AWS Identity and Access Management (IAM). This ensures that only specified IAM users or roles (e.g., those assumed by Amazon EC2 instances or ECS tasks) can access your container repositories and images.
-- Broad Compatibility: You can use your preferred command-line interface (CLI) — such as the Docker CLI or AWS CLI — to push, pull, and manage Docker images, Open Container Initiative (OCI) images, and OCI-compatible artifacts.
+- **Private Repositories**: ECR supports private repositories, with **access** controlled through resource-based permissions **using AWS Identity and Access Management (IAM)**. This ensures that only specified IAM users or roles (e.g., those assumed by Amazon EC2 instances or ECS tasks) can access your container repositories and images.
+- **Broad Compatibility**: You can use your preferred command-line interface (CLI) — such as the Docker CLI or AWS CLI — to push, pull, and manage Docker images, Open Container Initiative (OCI) images, and OCI-compatible artifacts.
 
-In this workshop, we will first create an ECR repository. Then, we will build and push two distinct container images to this repository: a core image (for our core application) and an admin image (for our admin application).
+In this workshop, we will first create an ECR repository. Then, we will build and push **two distinct container images to this repository**: a **core image** (for our core application) and an **admin image** (for our admin application).
 
 ___
 

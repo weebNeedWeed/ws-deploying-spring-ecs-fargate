@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 6.1 </b> "
 ---
 
-Since our core application uses session-based authentication, users might lose their session if the Application Load Balancer (ALB) routes their subsequent requests to different backend targets. To prevent this, we need to enable Session Stickiness (also known as target group stickiness). This feature ensures that requests from a specific user are consistently directed to the same target for a defined period, thereby preserving their session continuity. 
+Since our core application uses **session-based authentication**, users might **lose their session** if the Application Load Balancer routes their subsequent requests to different backend targets. To prevent this, we need to enable **Session Stickiness**. This feature ensures that requests from a specific user are consistently directed to the same target for a defined period, thereby preserving their session continuity. 
 
 ___
 

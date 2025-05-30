@@ -8,21 +8,21 @@ pre : " <b> 3.1 </b> "
 
 #### Amazon RDS Overview
 
-Amazon Relational Database Service (Amazon RDS) is a web service designed to simplify setting up, operating, and scaling relational databases in the AWS Cloud. It offers cost-efficient, resizable capacity for industry-standard relational databases while managing common database administration tasks.
+**Amazon Relational Database Service (Amazon RDS)** is a web service designed to **simplify setting up, operating, and scaling relational databases** in the AWS Cloud. It offers **cost-efficient**, resizable capacity for industry-standard relational databases while managing common database administration tasks.
 
 Compared to self-managed database deployments, Amazon RDS offers several key advantages:
 
-- Familiar Database Engines: You can use popular database engines like IBM Db2, MariaDB, Microsoft SQL Server, MySQL, Oracle Database, and PostgreSQL.
-- Managed Services: Amazon RDS handles essential tasks such as backups, software patching, automatic failure detection, and recovery. This frees you to focus on your application.
-- High Availability and Read Scaling: You can achieve high availability with a primary DB instance and a synchronous secondary instance for failover. Additionally, read replicas can be used to scale read-heavy workloads.
+- **Familiar Database Engines**: You can use popular database engines like IBM Db2, MariaDB, Microsoft SQL Server, MySQL, Oracle Database, and **PostgreSQL**.
+- **Managed Services**: **Amazon RDS handles essential tasks** such as backups, software patching, automatic failure detection, and recovery. This frees you to focus on your application.
+- **High Availability and Read Scaling**: You can achieve high availability with a primary DB instance and a synchronous secondary instance for failover. Additionally, read replicas can be used to scale read-heavy workloads.
 
-While AWS generally recommends provisioning databases across at least two Availability Zones (AZs) for enhanced resilience, this workshop will deploy a single database instance in one subnet within a single AZ to minimize costs.
+While AWS generally **recommends provisioning databases across at least two Availability Zones (AZs)** for enhanced resilience, **this workshop will deploy a single database instance** in one subnet within a single AZ to **minimize costs**.
 
 ___
 
 #### Create Subnet Group
 
-A database subnet group is a collection of subnets (typically private) that you create in a VPC and that you then designate for your database instances. By using a database subnet group, you can specify a particular VPC when creating database instances.
+**A database subnet group** is a collection of subnets (typically private) that you create in a VPC and that you then designate for your database instances. By using a database subnet group, **you can specify a particular VPC** when creating database instances.
 
 1\. In the AWS Console search bar, type "RDS" and select **Aurora and RDS** from the dropdown, or navigate to **Services > Database > Aurora and RDS**.
 

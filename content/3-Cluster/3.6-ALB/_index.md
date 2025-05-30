@@ -8,13 +8,15 @@ pre : " <b> 3.6 </b> "
 
 #### Application Load Balancer Overview
 
-An Application Load Balancer (ALB) operates at the application layer (Layer 7) of the Open Systems Interconnection (OSI) model. When a request reaches the ALB, it first evaluates listener rules in priority order to determine the appropriate action. Based on this rule, it then selects a target from the designated target group. You can configure listener rules to intelligently route requests to different target groups based on application traffic content, such as the path or host. 
+An **Application Load Balancer (ALB)** operates at the application layer (Layer 7) of the Open Systems Interconnection (OSI) model. When a request reaches the ALB, it first **evaluates listener rules in priority order** to determine the appropriate action. Based on this rule, it then **selects a target** from the designated target group. You can configure listener rules to intelligently route requests to different target groups based on application traffic content, such as the path or host. 
 
 ALBs offer great flexibility:
 
-- You can add or remove targets as your needs evolve, without disrupting the overall request flow to your application.
-- Elastic Load Balancing automatically scales your load balancer capacity in response to traffic changes, handling the vast majority of workloads seamlessly. 
-- You can configure health checks to monitor the status of registered targets. This ensures the ALB only sends requests to healthy instances, improving your application's fault tolerance. 
+- You can **add or remove targets as your needs evolve**, without disrupting the overall request flow to your application.
+- Elastic Load Balancing **automatically scales your load balancer capacity** in response to traffic changes, handling the vast majority of workloads seamlessly. 
+- You can **configure health checks to monitor the status of registered targets**. This ensures the ALB only sends requests to healthy instances, improving your application's fault tolerance. 
+
+![image](/images/3.6/alb.png)
 
 ___
 
@@ -22,7 +24,7 @@ ___
 
 Target groups are essential for routing requests to your registered resources, like EC2 instances, Lambda functions, or IP addresses. They use the protocol and port you define for this routing, and a single target can be registered with multiple target groups if needed.
 
-For our AWS Fargate tasks, we will create a target group of type IP addresses. This is because tasks launched using AWS Fargate are associated with an elastic network interface (ENI) and receive their own IP address, rather than running on an underlying Amazon EC2 instance managed by you.
+For our AWS Fargate tasks, we will create a **target group of type IP addresses**. This is because **tasks launched using AWS Fargate** are associated with an elastic network interface (ENI) and **receive their own IP address**, rather than running on an underlying Amazon EC2 instance managed by you.
 
 1\. Navigate to EC2:
    - In the AWS Console search bar, type `EC2`
