@@ -33,6 +33,18 @@ This workshop might take up to **3 hours** to complete.
 
 **1\. [Introduction](1-introduction/):** Introduce the to-do application, Momentum, that we will deploy. We will review the cloud architecture and examine the fundamentals of Amazon ECS and AWS Fargate.
 
+**2\. [Networking Configuration](2-networking/):** Set up the foundational AWS networking infrastructure including VPC, subnets, internet gateway, NAT gateway, route tables, and security groups.
+
+**3\. [Cluster Setup](3-cluster/):** Create and configure the Amazon ECS cluster, set up secrets management, deploy the core and admin applications, and enable service-to-service communication.
+
+**4\. [Debugging With ECS Exec](4-ecsexec/):** Configure ECS Exec functionality to enable secure shell access to running containers for debugging and troubleshooting.
+
+**5\. [Configure the Standard CI/CD Pipeline](5-cicd/):** Build a continuous integration and deployment pipeline using AWS CodePipeline and CodeBuild to automate application deployments.
+
+**6\. [Configure Service Auto Scaling](6-serviceautoscaling/):** Implement automatic scaling policies to handle varying application loads efficiently.
+
+**7\. [Cleanup](7-cleanup/):** Clean up all AWS resources created during the workshop to avoid ongoing costs.
+
 #### Overall Architecture - Application & Networking Flow
 
 ![archi-user](/images/archi-user.svg)
